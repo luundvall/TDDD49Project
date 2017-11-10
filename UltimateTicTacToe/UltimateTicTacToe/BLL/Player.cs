@@ -7,24 +7,19 @@ namespace UltimateTicTacToe.BLL
     {
         private string marker;
         private GameLoop game;
+        InterfaceBoard<UltimateBoard> ultimateBoard;
+        InterfaceBoard<SubBoard> subBoard;
+
 
         public Player (string marker, GameLoop game)
         {
             this.game = game;
             this.marker = marker;
-            
-                Console.WriteLine("Creating players.. with marker - " + this.marker);
        
         }
 
-        public int makeMove()
-        {
-            UltimateBoard  uB = game.GetUltimateBoard();
-            Board board = uB.getBoardofBoards[1, 2];
-            Button b = board.GetboardButtons[1, 2];
-            return 0;
-
-        }
+        internal InterfaceBoard<UltimateBoard> UltimateBoard { get => ultimateBoard; set => ultimateBoard = value; }
+        internal InterfaceBoard<SubBoard> SubBoard { get => subBoard; set => subBoard = value; }
 
         public string setMarker()
         {

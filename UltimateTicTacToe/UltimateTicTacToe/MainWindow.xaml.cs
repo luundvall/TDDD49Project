@@ -22,14 +22,7 @@ namespace UltimateTicTacToe
 
         private void CreateUI()
         { 
-            for(int row = 0; row<3; row++)
-            {
-                for(int col = 0; col<3; col++)
-                {
-                    Button b = gameLoop.GetUltimateBoard().getBoardofBoards[col, row].GetboardButtons[col, row];
-                }
 
-            }
         }
 
         private void CreateGame()

@@ -6,5 +6,7 @@
         xmlns:local="clr-namespace:UltimateTicTacToe"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Button x:Name="MyCreatedButton" Content="Button" HorizontalAlignment="Left" Margin="176,128,0,0" VerticalAlignment="Top" Width="75"/>
+    <Grid HorizontalAlignment="Left" Height="308" Margin="10,10,0,0" VerticalAlignment="Top" Width="505">
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="40" Height="30"/>
+    </Grid>
 </Window>

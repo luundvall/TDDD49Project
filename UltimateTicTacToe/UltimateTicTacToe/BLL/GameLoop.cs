@@ -10,27 +10,71 @@ namespace UltimateTicTacToe.BLL
     {
         private Player player1;
         private Player player2;
-        private UltimateBoard ultimateBoard;
+        private Player activePlayer;
+        private UltimateBoard ub;
+        bool turn;
+        private int id;
+        bool winner;
+        SubBoard activeBoard;
 
-        public void run()
+        public GameLoop()
         {
-            bool winner = false;
-            while(winner)
-            {
-                Console.WriteLine("Run loop");
-            }
+            this.winner = true;
+            this.activePlayer = player1;
+            ub = new UltimateBoard(new SubBoard(id));
+            this.activeBoard = ub.GetSubBoard(1);
+            createComponents();
         }
 
         public void createComponents()
         {
-            ultimateBoard = new UltimateBoard(this);
             player1 = new Player("X", this);
-            player2 = new Player("O", this); 
+            player2 = new Player("O", this);
         }
 
-        public UltimateBoard GetUltimateBoard()
+        public void run()
         {
-            return this.ultimateBoard;
+            
+           
+           
+            
+            while (this.winner)
+            {
+
+                if (turn)
+                {
+                    activePlayer = player2;
+                    turn = false;
+                }
+                else
+                {
+                    activePlayer = player1;
+                    turn = true;
+                }
+
+                Console.WriteLine("Active player is : " + activePlayer.setMarker() +  " Active board is: " + activeBoard.Id);
+                int move = Convert.ToInt32(Console.ReadLine());
+
+                Button setButton = activeBoard.GetButton(move);
+                ub.GetSubBoard(move).getActiveBoard();
+                Console.WriteLine("Selected button: " + setButton.Id + " on board: " + setButton.getBoardId());
+                
+                if (!activeBoard.GetButton(move).GetIsTaken().Equals(""))
+                { 
+                    Console.WriteLine("Button " + activeBoard.GetButton(move).Id + " is already taken by Player: " + ub.getBoardSelf().GetSubBoard(move).GetButton(move).GetIsTaken() + " in board: " + ub.getBoardSelf().GetSubBoard(move).GetButton(move).getBoardId());
+                }
+                else
+                {
+
+                        activeBoard = ub.GetSubBoard(move);
+                        ub.GetSubBoard(move).GetButton(move).SetIsTaken(activePlayer.setMarker());
+                        //activeBoard.setActiveBoard(true);
+
+                    
+                }
+            }
+          
         }
+
     }
 }

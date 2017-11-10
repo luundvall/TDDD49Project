@@ -65,8 +65,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BLL\Board.cs" />
+    <Compile Include="BLL\InterfaceButton.cs" />
+    <Compile Include="BLL\SubBoard.cs" />
+    <Compile Include="BLL\Button.cs" />
     <Compile Include="BLL\GameLoop.cs" />
+    <Compile Include="BLL\InterfaceBoard.cs" />
     <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />
     <Compile Include="MainWindow.xaml.cs">
