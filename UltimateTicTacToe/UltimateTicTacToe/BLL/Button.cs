@@ -16,11 +16,6 @@
 
         public int Id { get => id; set => id = value; }
 
-        public Button getButton()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public int getBoardId()
         {
             return this.boardId;
@@ -35,6 +30,5 @@
         {
             return this.isTaken;
         }
-
     }
 }

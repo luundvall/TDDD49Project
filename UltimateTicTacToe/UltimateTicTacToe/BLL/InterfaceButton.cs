@@ -9,7 +9,9 @@ namespace UltimateTicTacToe.BLL
     public interface InterfaceButton
     {
 
-        Button getButton();
+        string GetIsTaken();
+
+        void SetIsTaken(String marker);
 
     }
 }

@@ -28,3 +28,18 @@ C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\UltimateTicTacToe\Ultim
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.Properties.Resources.resources
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.csproj.GenerateResource.Cache
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.csproj.CoreCompileInputs.cache
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\bin\Debug\UltimateTicTacToe.exe.config
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\bin\Debug\UltimateTicTacToe.exe
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\bin\Debug\UltimateTicTacToe.pdb
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.csprojResolveAssemblyReference.cache
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\MainWindow.g.cs
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\App.g.cs
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe_MarkupCompile.cache
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe_MarkupCompile.lref
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\MainWindow.baml
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.g.resources
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.Properties.Resources.resources
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.csproj.GenerateResource.Cache
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.csproj.CoreCompileInputs.cache
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.exe
+Z:\www-pub\#C\TDDD49Project\UltimateTicTacToe\UltimateTicTacToe\obj\Debug\UltimateTicTacToe.pdb

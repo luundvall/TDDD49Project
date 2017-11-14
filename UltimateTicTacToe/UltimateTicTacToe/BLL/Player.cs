@@ -26,5 +26,7 @@ namespace UltimateTicTacToe.BLL
             return this.marker;
         }
 
+        
+
     }
 }

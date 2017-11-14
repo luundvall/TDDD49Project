@@ -5,6 +5,8 @@ namespace UltimateTicTacToe.BLL
     class SubBoard : InterfaceBoard <SubBoard>
     {
         InterfaceBoard <UltimateBoard> ultimateBoard;
+        InterfaceButton IButton; 
+
 
         private int id;
         private Button[,] buttonBoard = new Button[3, 3];
