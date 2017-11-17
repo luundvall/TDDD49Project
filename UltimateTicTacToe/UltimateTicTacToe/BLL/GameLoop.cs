@@ -19,7 +19,7 @@ namespace UltimateTicTacToe.BLL
 
         public GameLoop()
         {
-            this.winner = true;
+            this.winner = false;
             this.activePlayer = player1;
             ub = new UltimateBoard(new SubBoard(id));
             this.activeBoard = ub.GetSubBoard(1);
@@ -35,7 +35,7 @@ namespace UltimateTicTacToe.BLL
         public void run()
         {
             
-            while (this.winner)
+            while (!this.winner || !player1.GetPlayerIsWinner() || !player2.GetPlayerIsWinner())
             {
                 if (turn)
                 {
@@ -50,9 +50,8 @@ namespace UltimateTicTacToe.BLL
 
                 Console.WriteLine("Active player is : " + activePlayer.setMarker() +  " Active board is: " + this.activeBoard.Id);
                 int move = Convert.ToInt32(Console.ReadLine());
-
-                Button setButton = this.activeBoard.GetButton(move);
-                Console.WriteLine("Selected button: " + setButton.Id + " on board: " + setButton.getBoardId());
+                    Button setButton = this.activeBoard.GetButton(move);
+                    Console.WriteLine("Selected button: " + setButton.Id + " on board: " + setButton.getBoardId());
 
                 if (!this.activeBoard.GetButton(setButton.Id).GetIsTaken().Equals(""))
                 { 
@@ -62,15 +61,29 @@ namespace UltimateTicTacToe.BLL
                 {
                         this.activeBoard.GetButton(move).SetIsTaken(activePlayer.setMarker());
                         activeBoard = ub.GetSubBoard(move);
-                        checkWinnerVertical();
-                        //checkWinnerHorizontal();
-                        //checkWinnerDiagonal();
+                        this.activePlayer.PlayerIsWinner(checkWinner());
+                        Console.WriteLine("any winner: " + this.activePlayer.GetPlayerIsWinner());
                 }
             }
           
         }
 
-        public void checkWinnerVertical()
+        public bool checkWinner()
+        {
+            if(checkWinnerVertical())
+            {
+                return true;
+            } else if (checkWinnerHorizontal())
+            {
+                return true;
+            } else if(checkWinnerDiagonal())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool checkWinnerVertical()
         {
             Button[,] listOfButtons = activeBoard.getButtonList();
 
@@ -87,14 +100,15 @@ namespace UltimateTicTacToe.BLL
                         if (count == 3)
                         {
                             Console.WriteLine("Vertical winner : " + activePlayer.setMarker());
-                            break;
+                            return true;
                         }
                     }
                 }
             }
+            return false;
         }
 
-        private void checkWinnerDiagonal()
+        private bool checkWinnerDiagonal()
         {
             Button[,] listOfButtons = activeBoard.getButtonList();
             Button b1;
@@ -109,6 +123,7 @@ namespace UltimateTicTacToe.BLL
                     if(count159 ==3 )
                     {
                         Console.WriteLine("Diagonal winner : " + activePlayer.setMarker());
+                        return true;
                     }
                 }
                 x++;         
@@ -125,14 +140,16 @@ namespace UltimateTicTacToe.BLL
                     if (count357 == 3)
                     {
                         Console.WriteLine("Diagonal winner : " + activePlayer.setMarker());
+                        return true;
                     }
                 }
                 xx--;
             }
+            return false;
 
         }
 
-        public void checkWinnerHorizontal()
+        public bool checkWinnerHorizontal()
         {
             Button[,] listOfButtons = activeBoard.getButtonList();
 
@@ -149,10 +166,12 @@ namespace UltimateTicTacToe.BLL
                         if (count == 3)
                         {
                             Console.WriteLine("Horizontal winner : " + activePlayer.setMarker());
+                            return true;
                         }
                     }
                 }
             }
+            return false;
         }
 
     }
