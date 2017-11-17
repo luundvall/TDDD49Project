@@ -35,7 +35,7 @@ namespace UltimateTicTacToe.BLL
         public void run()
         {
             
-            while (!this.winner || !player1.GetPlayerIsWinner() || !player2.GetPlayerIsWinner())
+            while (!this.winner)
             {
                 if (turn)
                 {
@@ -61,56 +61,16 @@ namespace UltimateTicTacToe.BLL
                 {
                         this.activeBoard.GetButton(move).SetIsTaken(activePlayer.setMarker());
                         activeBoard = ub.GetSubBoard(move);
-                        this.activePlayer.PlayerIsWinner(checkWinner());
-                        Console.WriteLine("any winner: " + this.activePlayer.GetPlayerIsWinner());
+                        this.winner = checkAllBoards();
+                        activePlayer.PlayerIsWinner(this.winner);
                 }
             }
           
         }
 
-        public bool checkWinner()
+        private bool checkWinnerDiagonal(SubBoard board)
         {
-            if(checkWinnerVertical())
-            {
-                return true;
-            } else if (checkWinnerHorizontal())
-            {
-                return true;
-            } else if(checkWinnerDiagonal())
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool checkWinnerVertical()
-        {
-            Button[,] listOfButtons = activeBoard.getButtonList();
-
-            Button b1;
-            int count = 0;
-            for (int x = 0; x < 3; x++)
-            {
-                for (int y = 0; y < 3; y++)
-                {
-                    b1 = listOfButtons[y, x];
-                    if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
-                    {
-                        count++;
-                        if (count == 3)
-                        {
-                            Console.WriteLine("Vertical winner : " + activePlayer.setMarker());
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool checkWinnerDiagonal()
-        {
-            Button[,] listOfButtons = activeBoard.getButtonList();
+            Button[,] listOfButtons = board.getButtonList();
             Button b1;
             int x = 0;
             int count159 = 0;
@@ -122,7 +82,7 @@ namespace UltimateTicTacToe.BLL
                     count159++;
                     if(count159 ==3 )
                     {
-                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker());
+                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
                         return true;
                     }
                 }
@@ -139,7 +99,7 @@ namespace UltimateTicTacToe.BLL
                     count357++;
                     if (count357 == 3)
                     {
-                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker());
+                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker() +  " on board: " + board.Id );
                         return true;
                     }
                 }
@@ -149,9 +109,9 @@ namespace UltimateTicTacToe.BLL
 
         }
 
-        public bool checkWinnerHorizontal()
+         public bool checkWinnerVertical(SubBoard board)
         {
-            Button[,] listOfButtons = activeBoard.getButtonList();
+            Button[,] listOfButtons = board.getButtonList();
 
             Button b1;
             int count = 0;
@@ -159,13 +119,16 @@ namespace UltimateTicTacToe.BLL
             {
                 for (int y = 0; y < 3; y++)
                 {
-                    b1 = listOfButtons[x, y];
+
+                    b1 = listOfButtons[y, x];
                     if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
                     {
                         count++;
+                        
                         if (count == 3)
                         {
-                            Console.WriteLine("Horizontal winner : " + activePlayer.setMarker());
+                            Console.WriteLine("Vertical winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
+                            
                             return true;
                         }
                     }
@@ -174,5 +137,57 @@ namespace UltimateTicTacToe.BLL
             return false;
         }
 
+        public bool checkAllBoards()
+        {
+            SubBoard [,] listOfBoards = ub.getBoardList();
+
+            for(int y = 0; y < 3; y++) 
+                {
+                for (int x = 0; x<3; x++ ) 
+                    {
+
+                     
+
+                    SubBoard board = listOfBoards[x,y];
+                    if(checkWinnerHorizontal(board))
+                    {
+                        return true;
+                    } else if (checkWinnerVertical(board))
+                    {
+                        return true;
+                    } else if (checkWinnerDiagonal(board))
+                    {
+                        return true;
+                    }
+
+                    }
+                }
+            return false;
+        }
+
+        public bool checkWinnerHorizontal(SubBoard board)
+        {
+            Button[,] listOfButtons = board.getButtonList();
+            
+            Button b1;
+            int count = 0;
+                for (int x = 0; x < 3; x++)
+                {
+                    for (int y = 0; y < 3; y++)
+                    {
+                        b1 = listOfButtons[x, y];
+                        if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
+                        {
+                            count++;
+                            if (count == 3)
+                            {
+                                Console.WriteLine("Horizontal winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            return false;
+        }
     }
 }
