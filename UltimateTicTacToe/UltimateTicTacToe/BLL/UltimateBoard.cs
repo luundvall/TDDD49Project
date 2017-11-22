@@ -1,38 +1,23 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UltimateTicTacToe.BLL
+namespace WpfApp1.BLL
 {
-    class UltimateBoard : InterfaceBoard<UltimateBoard>
+    class UltimateBoard
     {
-        private SubBoard[,] subBoards = new SubBoard[3, 3];
-        private string TypeOfBoard;
-
-        public UltimateBoard(SubBoard s1)
+        private SubBoard[,] subBoards = null;
+        public UltimateBoard(SubBoard[,] subBoards)
         {
-            this.TypeOfBoard = "Ultimate board";
-            int id = 0;
-            for (int row = 0; row < 3; row++)
-            {
-                for (int column = 0; column < 3; column++)
-                {
-                    id++;
-                    subBoards[row, column] = new SubBoard(id);
-                }
-            }
+            this.subBoards = subBoards; 
         }
 
-        public UltimateBoard getBoardSelf()
+        public SubBoard[,] getListOfSub()
         {
-            return this;
-        }
-
-        public UltimateBoard[] getPostion(int id)
-        {
-            return null;
+            return this.subBoards; 
         }
 
         public SubBoard GetSubBoard(int move)
@@ -40,28 +25,18 @@ namespace UltimateTicTacToe.BLL
 
             for (int row = 0; row < 3; row++)
             {
-                for (int column = 0; column < 3; column++)
+                for (int col = 0; col < 3; col++)
                 {
-                    SubBoard subBoard = subBoards[row, column];
-                    if (subBoard.Id.Equals(move))
+                    SubBoard subBoard = this.subBoards[row, col];
+                    if (subBoard.getId().Equals(move))
                     {
                         return subBoard;
-                        break;
                     }
                 }
             }
-
             return null;
         }
 
-        public string getTypeOfBoard()
-        {
-            return this.TypeOfBoard;
-        }
 
-        public SubBoard[,] getBoardList()
-        {
-            return this.subBoards;    
-        }
     }
 }

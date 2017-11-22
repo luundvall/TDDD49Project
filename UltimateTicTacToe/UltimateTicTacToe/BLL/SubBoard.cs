@@ -1,85 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UltimateTicTacToe.BLL
+namespace WpfApp1.BLL
 {
-    class SubBoard : InterfaceBoard <SubBoard>
+    class SubBoard
     {
-        InterfaceBoard <UltimateBoard> ultimateBoard;
-        InterfaceButton IButton; 
+        private Button[,] buttonBoard;
+        private int id; 
 
-
-        private int id;
-        private Button[,] buttonBoard = new Button[3, 3];
-        private bool activeBoard;
-
-        public SubBoard(int id)
+        public SubBoard(Button [,] bb, int id)
         {
-            this.activeBoard = false;
-            int buttonId = 0;
-            for (int row = 0; row < 3; row++)
-            {
-                for (int column = 0; column < 3; column++)
-                {
-                    buttonId++;
-                    buttonBoard[row, column] = new Button(buttonId, id);
-                }
-            }
+            this.buttonBoard = bb;
             this.id = id;
         }
 
-        public int Id { get => id; set => id = value; }
-
-        public bool getActiveBoard()
+        public Button [,] getButtonBoard()
         {
-            return this.activeBoard;
-        }
-        public void setActiveBoard(bool active)
-        {
-            this.activeBoard = active;
-        }
+            return this.buttonBoard; 
+        } 
 
-        public SubBoard getBoardSelf()
+        public Button getButton(int move)
         {
-            return this;
-        }
-
-        public SubBoard getBoardById(int BoardId)
-        {
-
-            if (this.id == BoardId)
+            for (int brow = 0; brow < buttonBoard.GetLength(0); brow++)
             {
-                return this;
-
-            }
-            return null;
-               
-        }
-
-
-        public Button GetButton(int move)
-        {
-            for (int row = 0; row < 3; row++)
-            {
-                for (int column = 0; column < 3; column++)
+                for (int bcol = 0; bcol < buttonBoard.GetLength(1); bcol++)
                 {
-                    Button button = buttonBoard[row, column];
-                    if (button.Id.Equals(move))
+                    if(buttonBoard[brow, bcol].ButtonId.Equals(move))
                     {
-                        return button;
+                        return buttonBoard[brow, bcol]; 
                     }
                 }
             }
-            return null;
+            return null; 
         }
 
-        public string getTypeOfBoard()
+        public int getId()
         {
-            return "SubBoard";
-        }
-
-        public Button[,] getButtonList()
-        {
-            return this.buttonBoard;
+            return this.id; 
         }
     }
 }

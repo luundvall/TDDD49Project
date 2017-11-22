@@ -4,131 +4,104 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UltimateTicTacToe.BLL
+namespace WpfApp1.BLL
 {
     class GameLoop
     {
+        private UltimateBoard ultiBoard;
+        private bool winner = false;
+        private Player activePlayer = new Player("x");
+        private SubBoard activeBoard;
         private Player player1;
         private Player player2;
-        private Player activePlayer;
-        private UltimateBoard ub;
-        bool turn;
-        private int id;
-        bool winner;
-        SubBoard activeBoard;
+        private bool turn = false; 
 
-        public GameLoop()
+        public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
-            this.winner = false;
-            this.activePlayer = player1;
-            ub = new UltimateBoard(new SubBoard(id));
-            this.activeBoard = ub.GetSubBoard(1);
-            createComponents();
+            this.ultiBoard = ub;
+            this.activeBoard = ultiBoard.GetSubBoard(1);
+            this.activePlayer = playerX;
+            this.player1 = playerX;
+            this.player2 = playerO;         
         }
 
-        public void createComponents()
-        {
-            player1 = new Player("X", this);
-            player2 = new Player("O", this);
-        }
 
         public void run()
         {
-            
+            int move;
             while (!this.winner)
             {
+                
                 if (turn)
                 {
-                    activePlayer = player2;
-                    turn = false;
-                }
-                else
-                {
                     activePlayer = player1;
-                    turn = true;
-                }
-
-                Console.WriteLine("Active player is : " + activePlayer.setMarker() +  " Active board is: " + this.activeBoard.Id);
-                int move = Convert.ToInt32(Console.ReadLine());
-                    Button setButton = this.activeBoard.GetButton(move);
-                    Console.WriteLine("Selected button: " + setButton.Id + " on board: " + setButton.getBoardId());
-
-                if (!this.activeBoard.GetButton(setButton.Id).GetIsTaken().Equals(""))
-                { 
-                    Console.WriteLine("Button " + activeBoard.GetButton(move).Id + " is already taken by Player: " + ub.getBoardSelf().GetSubBoard(move).GetButton(move).GetIsTaken() + " in board: " + ub.getBoardSelf().GetSubBoard(move).GetButton(move).getBoardId());
-                }
-                else
+                    turn = false;
+                } else
                 {
-                        this.activeBoard.GetButton(move).SetIsTaken(activePlayer.setMarker());
-                        activeBoard = ub.GetSubBoard(move);
-                        this.winner = checkAllBoards();
-                        activePlayer.PlayerIsWinner(this.winner);
+                    activePlayer = player2;
+                    turn = true; 
+                }
+               
+                Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
+                move = Convert.ToInt32(Console.ReadLine());
+                Button clickedButton = this.activeBoard.getButton(move);
+                Console.WriteLine("Clicked on button: " + clickedButton.ButtonId +  ", on board:  " + clickedButton.BoardId );
+               
+                if(!this.activeBoard.getButton(clickedButton.ButtonId).getMarker().Equals(""))
+                {
+                    Console.WriteLine("Player " + clickedButton.getMarker() +" Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + " already..");
+                } else
+                {
+                    clickedButton.setMarker(activePlayer.setMarker()); 
+                    activeBoard = ultiBoard.GetSubBoard(clickedButton.ButtonId);
+
                 }
             }
-          
         }
 
-        private bool checkWinnerDiagonal(SubBoard board)
+        public bool checkWinner()
         {
-            Button[,] listOfButtons = board.getButtonList();
-            Button b1;
-            int x = 0;
-            int count159 = 0;
-            for (int y = 0; y <= 2; y++)
+            SubBoard[,] listOfBoards = ultiBoard.getListOfSub();
+            for (int y = 0; y<3; y++)
             {
-                b1 = listOfButtons[x, y];
-                if(b1.GetIsTaken().Equals(activePlayer.setMarker()))
+                for (int x = 0; x<3; x++)
                 {
-                    count159++;
-                    if(count159 ==3 )
+                    SubBoard board = listOfBoards[x, y];
+                    if (checkWinnerVertical(board))
                     {
-                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
                         return true;
                     }
-                }
-                x++;         
-            }
+                    else if (checkWinnerHorizontal(board))
+                    {
+                        return true;
+                    }
+                    else if (checkWinnerDiagonal(board))
+                    {
+                        return true;
+                    }
 
-            int xx = 2;
-            int count357 = 0;
-            for (int y = 0; y <= 2; y++)
-            {
-                b1 = listOfButtons[xx, y];
-                if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
-                {
-                    count357++;
-                    if (count357 == 3)
-                    {
-                        Console.WriteLine("Diagonal winner : " + activePlayer.setMarker() +  " on board: " + board.Id );
-                        return true;
-                    }
                 }
-                xx--;
             }
             return false;
-
         }
 
-         public bool checkWinnerVertical(SubBoard board)
+        public bool checkWinnerVertical(SubBoard board)
         {
-            Button[,] listOfButtons = board.getButtonList();
 
+            Button[,] buttons = board.getButtonBoard();
             Button b1;
-            int count = 0;
-            for (int x = 0; x < 3; x++)
+            int count = 0; 
+            for (int x = 0; x<3; x++)
             {
-                for (int y = 0; y < 3; y++)
+                for(int y = 0; y<3; y++)
                 {
-
-                    b1 = listOfButtons[y, x];
-                    if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
+                    b1 = buttons[y, x];
+                    if(b1.getMarker().Equals(activePlayer.setMarker()))
                     {
                         count++;
-                        
-                        if (count == 3)
+                        if(count == 3)
                         {
-                            Console.WriteLine("Vertical winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
-                            
+                            Console.WriteLine("Vertical winner: " + activePlayer.setMarker());
                             return true;
                         }
                     }
@@ -137,56 +110,48 @@ namespace UltimateTicTacToe.BLL
             return false;
         }
 
-        public bool checkAllBoards()
+        public bool checkWinnerDiagonal(SubBoard board)
         {
-            SubBoard [,] listOfBoards = ub.getBoardList();
-
-            for(int y = 0; y < 3; y++) 
+            Button[,] buttons = board.getButtonBoard();
+            Button b1;
+            int x = 0;
+            int count = 0; 
+            for (int y = 0; y<=2; y++)
+            {
+                b1 = buttons[x,y];
+                if(b1.getMarker().Equals(activePlayer.setMarker()))
                 {
-                for (int x = 0; x<3; x++ ) 
+                    count++; 
+                    if (count == 3)
                     {
-
-                     
-
-                    SubBoard board = listOfBoards[x,y];
-                    if(checkWinnerHorizontal(board))
-                    {
-                        return true;
-                    } else if (checkWinnerVertical(board))
-                    {
-                        return true;
-                    } else if (checkWinnerDiagonal(board))
-                    {
-                        return true;
-                    }
-
+                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());  
+                        return true; 
                     }
                 }
+
+            }
             return false;
+
+            int xx = 2;
+            int count2 = 0; 
+
+            for(int y = 0; y<=2; y++)
+            {
+                b1 = buttons[xx, y];
+                if(b1.getMarker().Equals(activePlayer.setMarker()))
+                {
+                    count2++;
+                    if (count2 == 3)
+                    {
+                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker()); 
+                    }
+                }
+            }
+
         }
 
         public bool checkWinnerHorizontal(SubBoard board)
         {
-            Button[,] listOfButtons = board.getButtonList();
-            
-            Button b1;
-            int count = 0;
-                for (int x = 0; x < 3; x++)
-                {
-                    for (int y = 0; y < 3; y++)
-                    {
-                        b1 = listOfButtons[x, y];
-                        if (b1.GetIsTaken().Equals(activePlayer.setMarker()))
-                        {
-                            count++;
-                            if (count == 3)
-                            {
-                                Console.WriteLine("Horizontal winner : " + activePlayer.setMarker() +  " on board: " + board.Id);
-                                return true;
-                            }
-                        }
-                    }
-                }
             return false;
         }
     }

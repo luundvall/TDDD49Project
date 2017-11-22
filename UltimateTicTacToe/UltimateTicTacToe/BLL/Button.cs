@@ -1,34 +1,34 @@
-﻿namespace UltimateTicTacToe.BLL
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WpfApp1.BLL
 {
-    public class Button : InterfaceButton
+    class Button
     {
-        private string isTaken;
-        private int id;
-        private int boardId;
-
-        public Button(int id, int boardId)
+        private int buttonId;
+        private string marker; 
+        private int boardId; 
+        public Button(int buttonId, int boardId)
         {
-            this.Id = id;
-            this.isTaken = "";
-            this.boardId = boardId;
-            
+            this.marker = "";
+            this.buttonId = buttonId;
+            this.boardId = boardId; 
         }
 
-        public int Id { get => id; set => id = value; }
+        public int ButtonId { get => this.buttonId; set => this.buttonId = value; }
 
-        public int getBoardId()
+        public void setMarker(string marker)
         {
-            return this.boardId;
+            this.marker = marker;
         }
 
-        public void SetIsTaken(string isTaken)
+        public string getMarker()
         {
-            this.isTaken = isTaken;
+            return this.marker; 
         }
-
-        public string GetIsTaken()
-        {
-            return this.isTaken;
-        }
+        public int BoardId { get => this.boardId; set => this.boardId = value; }
     }
 }

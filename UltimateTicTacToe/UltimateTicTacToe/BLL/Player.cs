@@ -1,44 +1,24 @@
 ﻿using System;
-using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UltimateTicTacToe.BLL
+namespace WpfApp1.BLL
 {
     class Player
     {
-        private string marker;
-        private GameLoop game;
-        InterfaceBoard<UltimateBoard> ultimateBoard;
-        InterfaceBoard<SubBoard> subBoard;
-        private bool isWinner = false;
+        private string marker; 
 
-
-        public Player (string marker, GameLoop game)
+        public Player(string playerMarker)
         {
-            this.game = game;
-            this.marker = marker;
-            this.isWinner = isWinner;
-       
+            this.marker = playerMarker;
         }
-
-        public bool GetPlayerIsWinner ()
-        {
-            return this.isWinner; 
-        }
-
-        public void PlayerIsWinner(bool winner)
-        {
-            this.isWinner = winner;
-        }
-
-        internal InterfaceBoard<UltimateBoard> UltimateBoard { get => ultimateBoard; set => ultimateBoard = value; }
-        internal InterfaceBoard<SubBoard> SubBoard { get => subBoard; set => subBoard = value; }
 
         public string setMarker()
         {
-            return this.marker;
-        }
-
-        
+            return this.marker; 
+        } 
 
     }
 }
