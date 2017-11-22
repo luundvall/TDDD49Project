@@ -1,0 +1,293 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="760" Height="850">
+    
+    <!-- Start Style -->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="DarkGreen" />
+        </Style>
+    </Window.Resources>
+    <!-- END Style-->
+
+    <!-- Start Container Grid -->
+    <Grid>
+        <!--START Header-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Something Y" TextWrapping="Wrap" Margin="0,25,300,0" FontSize="22" Background="AliceBlue" Padding="10"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Something X" TextWrapping="Wrap" Margin="300,25,0,0" FontSize="22" Background="AliceBlue" Padding="10" />
+        <!--END Header-->
+
+        <!--START Main Grid-->
+        <Grid Name="mainGrid" Grid.Row="1" Grid.Column="0" Background="Black" Width="700" Height="700" Margin="25,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--END Main Grid-->
+
+            <!-- START Top Left Child Grid-->
+            <Grid Tag="1" Grid.Row="0" Grid.Column="0" Background="Beige" Margin="19,15,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!--END Top Left Child Grid-->
+
+            <!--START Top Mid Child Grid-->
+            <Grid Tag="2" Grid.Row="0" Grid.Column="1" Background="Beige" Margin="5,18,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+                
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!--END Top Mid Child Grid-->
+
+            <!-- START Top Right Child Grid-->
+            <Grid Tag="3" Grid.Row="0" Grid.Column="3" Background="Beige" Margin="5,18,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Top Right Child Grid-->
+
+            <!-- START Middle Left Child Grid-->
+            <Grid Tag="4" Grid.Row="1" Grid.Column="0" Background="Beige" Margin="19,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Middle Left Child Grid-->
+
+            <!-- START Middle Middle Child Grid-->
+            <Grid Tag="5" Grid.Row="1" Grid.Column="1" Background="Beige" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Middle Middle Child Grid-->
+
+            <!-- START Middle Right Child Grid-->
+            <Grid Tag="6" Grid.Row="1" Grid.Column="2" Background="Beige" Margin="5,5,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Middle Right Child Grid-->
+
+            <!-- START Bottom Left Child Grid-->
+            <Grid Tag="7" Grid.Row="2" Grid.Column="0" Background="Beige" Margin="19,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Bottom Left Child Grid-->
+
+            <!-- START Bottom Middle Child Grid-->
+            <Grid Tag="8" Grid.Row="2" Grid.Column="1" Background="Beige" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Bottom Middle Child Grid-->
+
+            <!-- Start Bottom Right Child Grid-->
+            <Grid Tag="9" Grid.Row="2" Grid.Column="2" Background="Beige" Margin="5,5,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Tag="1" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="3" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="4" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="6" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+
+                <Button Tag="7" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,2,2" />
+                <Button Tag="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="0,0,0,2" />
+                <Button Tag="9" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnClick" Height="70" Width="70" Margin="2,0,0,2" />
+            </Grid>
+            <!-- END Bottom Right Grid -->
+        </Grid>
+        <!-- END Main Grid -->
+    </Grid>
+    <!-- END Container Grid -->
+</Window>
