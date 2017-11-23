@@ -17,8 +17,6 @@ namespace WpfApp1.BLL
         private Player player1;
         private Player player2;
         private bool turn = false;
-        static Random rnd = new Random();
-        ArrayList avaiBoards = new ArrayList();
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -51,19 +49,10 @@ namespace WpfApp1.BLL
                     
                     activeBoard.NumberOfMoves();
                     clickedButton.setMarker(activePlayer.setMarker());
-                    Console.WriteLine("Number of moves: " + activeBoard.getNumberOfMoves() + "on board" + activeBoard.getId());
-
                     checkNumberOfMoves();
-                    activeBoard = ultiBoard.GetSubBoard(clickedButton.ButtonId);
-                    
-                    if(activeBoard.getDisable() || activeBoard.getNumberOfMoves() == 9)
-                    {
-                        int r = rnd.Next(AvailableBoards().Count);
-                        int number = AvailableBoards().IndexOf(r);
-                        Console.WriteLine("Random number of: " + number);
-                        activeBoard = ultiBoard.GetSubBoard(number); 
-                    }
-
+                    checkWinner();
+                    activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
+                    Console.WriteLine("Check winner =  " + checkWinner());
 
                     if (turn)
                     {
@@ -79,7 +68,21 @@ namespace WpfApp1.BLL
                 }
             }
         }
-
+        //Check if board is possible to move to
+        public SubBoard CheckActiveboard(SubBoard board)
+        {
+            if(board.getDisable() || board.getNumberOfMoves().Equals(9))
+            {
+                foreach(SubBoard s in ultiBoard.getListOfSub())
+                {
+                    if (!s.getDisable())
+                    {
+                        return s;
+                    }
+                }
+            }
+            return board;
+        }
 
         //Removes boards that have no buttons left
         public void checkNumberOfMoves()
@@ -93,26 +96,9 @@ namespace WpfApp1.BLL
                     if(listOfBoards[x, y].getNumberOfMoves().Equals(9))
                     {
                         listOfBoards[x, y].disableBoard(true);
-                        avaiBoards.Remove(listOfBoards[x, y].getId());
                     } 
                 }
             }
-        }
-        //Get a list of available boards
-        public ArrayList AvailableBoards()
-        {
-            SubBoard[,] listOfBoards = ultiBoard.getListOfSub();
-            for (int x = 0; x < 3; x++)
-            {
-                for (int y = 0; y < 3; y++)
-                {
-                    if(!listOfBoards[x, y].getDisable())
-                    {
-                        avaiBoards.Add(listOfBoards[x, y].getId()); 
-                    }
-                }
-            }
-            return avaiBoards;
         }
 
         public bool checkWinner()
@@ -123,16 +109,19 @@ namespace WpfApp1.BLL
                 for (int x = 0; x < 3; x++)
                 {
                     SubBoard board = listOfBoards[x, y];
-                    if (checkWinnerVertical(board))
+                    if (checkWinnerHorizontal(board))
                     {
+                        board.disableBoard(true);
                         return true;
                     }
-                    else if (checkWinnerHorizontal(board))
+                    else if (checkWinnerVertical(board))
                     {
+                        board.disableBoard(true);
                         return true;
                     }
                     else if (checkWinnerDiagonal(board))
                     {
+                        board.disableBoard(true);
                         return true;
                     }
 
@@ -157,7 +146,7 @@ namespace WpfApp1.BLL
                         count++;
                         if (count == 3)
                         {
-                            Console.WriteLine("Vertical winner: " + activePlayer.setMarker());
+                            Console.WriteLine("Vertical winner: " + activePlayer.setMarker() + "remove board: "  + board.getId());
                             return true;
                         }
                     }

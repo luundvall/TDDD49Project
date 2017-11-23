@@ -25,6 +25,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             Game game = new Game();
+            
 
             
         }
