@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace WpfApp1.BLL
 {
@@ -15,6 +17,8 @@ namespace WpfApp1.BLL
         private Player player1;
         private Player player2;
         private bool turn = false;
+        static Random rnd = new Random();
+        ArrayList avaiBoards = new ArrayList();
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -32,33 +36,83 @@ namespace WpfApp1.BLL
             while (!this.winner)
             {
 
-                if (turn)
-                {
-                    activePlayer = player1;
-                    turn = false;
-                }
-                else
-                {
-                    activePlayer = player2;
-                    turn = true;
-                }
 
                 Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
                 move = Convert.ToInt32(Console.ReadLine());
                 Button clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId);
-
+                
                 if (!this.activeBoard.getButton(clickedButton.ButtonId).getMarker().Equals(""))
                 {
                     Console.WriteLine("Player " + clickedButton.getMarker() + " Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + " already..");
                 }
                 else
                 {
+                    
+                    activeBoard.NumberOfMoves();
                     clickedButton.setMarker(activePlayer.setMarker());
+                    Console.WriteLine("Number of moves: " + activeBoard.getNumberOfMoves() + "on board" + activeBoard.getId());
+
+                    checkNumberOfMoves();
                     activeBoard = ultiBoard.GetSubBoard(clickedButton.ButtonId);
+                    
+                    if(activeBoard.getDisable() || activeBoard.getNumberOfMoves() == 9)
+                    {
+                        int r = rnd.Next(AvailableBoards().Count);
+                        int number = AvailableBoards().IndexOf(r);
+                        Console.WriteLine("Random number of: " + number);
+                        activeBoard = ultiBoard.GetSubBoard(number); 
+                    }
+
+
+                    if (turn)
+                    {
+                        activePlayer = player1;
+                        turn = false;
+                    }
+                    else
+                    {
+                        activePlayer = player2;
+                        turn = true;
+                    }
 
                 }
             }
+        }
+
+
+        //Removes boards that have no buttons left
+        public void checkNumberOfMoves()
+        {
+            SubBoard[,] listOfBoards = ultiBoard.getListOfSub();
+
+            for(int x = 0; x<3; x++)
+            {
+                for(int y = 0; y<3; y++)
+                {
+                    if(listOfBoards[x, y].getNumberOfMoves().Equals(9))
+                    {
+                        listOfBoards[x, y].disableBoard(true);
+                        avaiBoards.Remove(listOfBoards[x, y].getId());
+                    } 
+                }
+            }
+        }
+        //Get a list of available boards
+        public ArrayList AvailableBoards()
+        {
+            SubBoard[,] listOfBoards = ultiBoard.getListOfSub();
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    if(!listOfBoards[x, y].getDisable())
+                    {
+                        avaiBoards.Add(listOfBoards[x, y].getId()); 
+                    }
+                }
+            }
+            return avaiBoards;
         }
 
         public bool checkWinner()

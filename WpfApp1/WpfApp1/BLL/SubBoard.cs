@@ -10,11 +10,15 @@ namespace WpfApp1.BLL
     {
         private Button[,] buttonBoard;
         private int id;
+        private int numberOfMoves = 0;
+        private bool disable; 
 
         public SubBoard(Button[,] bb, int id)
         {
             this.buttonBoard = bb;
             this.id = id;
+            this.numberOfMoves = numberOfMoves;
+            this.disable = false;
         }
 
         public Button[,] getButtonBoard()
@@ -40,6 +44,26 @@ namespace WpfApp1.BLL
         public int getId()
         {
             return this.id;
+        }
+
+        public void NumberOfMoves()
+        {
+            this.numberOfMoves = numberOfMoves + 1; 
+        }
+
+        public int getNumberOfMoves()
+        {
+            return this.numberOfMoves; 
+        }
+
+        public void disableBoard(bool isDisable)
+        {
+            this.disable = isDisable;    
+        }
+
+        public bool getDisable()
+        {
+            return this.disable;
         }
     }
 }
