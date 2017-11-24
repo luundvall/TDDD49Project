@@ -32,53 +32,62 @@ namespace WpfApp1
             
                     this.game = game;
                     InitializeComponent();
-                    foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
-                    {
-                        string i = grid.Tag.ToString();
-                
-                        if(grid.Tag.Equals("1"))
-                        {
-                            grid.IsEnabled = true;
-                        } else
-                        {
-                            grid.IsEnabled = false;
-                        }
-                    }
+
                 }
 
-        private void btnClick(object sender, RoutedEventArgs e) {
+
+        private void btnClick(object sender, RoutedEventArgs e)
+        {
+            gameLoop = game.getGameLoop();
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
             var clickedButtonTag = clickedButton.Tag;
-            gameLoop = game.getGameLoop();
-            int move = Convert.ToInt32(clickedButtonTag);
             
-
-            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
-            if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
+            int move = Convert.ToInt32(clickedButtonTag);
+                       try
             {
-                Console.WriteLine("FAIL TO MAKE MOVE");
-            }
+                if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
+                {
+
+                }
             else
             {
+                ËnableGrid(clickedButtonTag.ToString());
                 gameLoop.run(move);
+                Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                 gameLoop.setMove();
-                foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
-                {
-                    string i = grid.Tag.ToString();
-                    Console.WriteLine(i); 
-                    if (grid.Tag.Equals(clickedButtonTag.ToString()))
-                    {
-                        grid.IsEnabled = true;
-                    }
-                    else
-                    {
-                        grid.IsEnabled = false;
-                    }
-                }
-                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
                 if (gameLoop.checkWinner())
                 {
                     Winner.Text = "The winner is... " + gameLoop.getActivePlayer().setMarker();
+                }
+
+                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
+            }
+            }
+            catch (Exception ex)
+            {
+                if (ex is ButtonTakenException)
+                {
+                    MessageBox.Show("The button is already taken, try again plz");
+                }
+                if(ex is DisableBoardException)
+                {
+                    MessageBox.Show("The board that you want to move to is disabled");
+                }
+            }
+        }
+
+        public void ËnableGrid(string tagId)
+        {
+            foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
+            {
+                string i = grid.Tag.ToString();
+                if (grid.Tag.Equals(tagId))
+                {
+                    grid.IsEnabled = true;
+                }
+                else
+                {
+                    grid.IsEnabled = false;
                 }
             }
         }

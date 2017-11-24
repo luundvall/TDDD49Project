@@ -21,15 +21,9 @@ namespace WpfApp1
         [STAThread]
         public static void Main(string [] args)
         {
-
-            Console.WriteLine("Works");
-
             Game game = new Game();
             MainWindow mainWindow = new MainWindow(game);
             mainWindow.ShowDialog();
-
-
-            
         }
     }
 }

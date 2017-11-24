@@ -58,7 +58,7 @@ namespace WpfApp1.BLL
         {
             activeBoard.NumberOfMoves();
             checkNumberOfMoves();
-            clickedButton.setMarker(activePlayer.setMarker());
+            checkWinner();
             if (turn)
             {
                 activePlayer = player1;
@@ -69,17 +69,20 @@ namespace WpfApp1.BLL
                 activePlayer = player2;
                 turn = true;
             }
+            clickedButton.setMarker(activePlayer.setMarker());
+
             Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
-            checkWinner();
+           
             activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
 
    
         }
 
-        public bool checkButton(int buttonId)
+        public bool checkButton(int buttonId) 
         {
             if (!this.activeBoard.getButton(buttonId).getMarker().Equals(""))
             {
+                throw new ButtonTakenException();
                 return true;
             }
             return false; 

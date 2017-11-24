@@ -63,6 +63,10 @@ namespace WpfApp1.BLL
 
         public bool getDisable()
         {
+            if(this.disable.Equals(true))
+            {
+                throw new DisableBoardException();
+            }
             return this.disable;
         }
     }
