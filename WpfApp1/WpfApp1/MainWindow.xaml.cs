@@ -72,7 +72,6 @@ namespace WpfApp1
                 gameLoop.run(move);
 
                 clickedButton.Content = gameLoop.getActivePlayer().setMarker();
-               // clickedButton.IsEnabled = false;
 
                 if(gameLoop.checkWinner())
                 {
