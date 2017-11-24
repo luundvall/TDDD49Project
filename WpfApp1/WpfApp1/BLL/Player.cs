@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
-    class Player
+   public class Player
     {
         private string marker;
 

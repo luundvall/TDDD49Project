@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
-    class UltimateBoard
+    public class UltimateBoard
     {
         private SubBoard[,] subBoards = null;
         public UltimateBoard(SubBoard[,] subBoards)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
-    class SubBoard
+    public class SubBoard
     {
         private Button[,] buttonBoard;
         private int id;

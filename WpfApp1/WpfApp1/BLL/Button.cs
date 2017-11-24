@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
-    class Button
+    public class Button
     {
         private int buttonId;
         private string marker;

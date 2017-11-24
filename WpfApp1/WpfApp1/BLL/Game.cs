@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
-    class Game
+    public class Game
     {
         private SubBoard[,] subBoards = new SubBoard[3, 3];
         private Player player1;

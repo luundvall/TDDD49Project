@@ -21,68 +21,66 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Game game;
-        GameLoop gameLoop;
-        
+        private Game game = null;
+        private GameLoop gameLoop;
 
         public MainWindow()
         {
-            InitializeComponent();
-            game = new Game();
-            foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
-            {
-                string i = grid.Tag.ToString();
-                
-                if(grid.Tag.Equals("1"))
-                {
-                    grid.IsEnabled = true;
-                } else
-                {
-                    grid.IsEnabled = false;
-                }
-            }
         }
+            public MainWindow(Game game)
+                {
+            
+                    this.game = game;
+                    InitializeComponent();
+                    foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
+                    {
+                        string i = grid.Tag.ToString();
+                
+                        if(grid.Tag.Equals("1"))
+                        {
+                            grid.IsEnabled = true;
+                        } else
+                        {
+                            grid.IsEnabled = false;
+                        }
+                    }
+                }
 
         private void btnClick(object sender, RoutedEventArgs e) {
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
             var clickedButtonTag = clickedButton.Tag;
-            foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
+            gameLoop = game.getGameLoop();
+            int move = Convert.ToInt32(clickedButtonTag);
+            
+
+            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
+            if (gameLoop.checkButton(move))
             {
-                string i = grid.Tag.ToString();
-                
-                if (grid.Tag.Equals(clickedButtonTag.ToString()))
+                Console.WriteLine("FAIL TO MAKE MOVE");
+            }
+            else
+            {
+                gameLoop.run(move);
+                gameLoop.setMove();
+                foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
                 {
-                    grid.IsEnabled = true;
+                    string i = grid.Tag.ToString();
+                    Console.WriteLine(i); 
+                    if (grid.Tag.Equals(clickedButtonTag.ToString()))
+                    {
+                        grid.IsEnabled = true;
+                    }
+                    else
+                    {
+                        grid.IsEnabled = false;
+                    }
                 }
-                else
+                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
+                if (gameLoop.checkWinner())
                 {
-                    grid.IsEnabled = false;
+                    Winner.Text = "The winner is... " + gameLoop.getActivePlayer().setMarker();
                 }
             }
-
-            FrameworkElement activeBorder = (FrameworkElement)((System.Windows.Controls.Button)sender).Parent;
-            var active = activeBorder.Tag;
-
-            gameLoop = game.getGameLoop();
-
-
-              
-                clickedButtonTag = clickedButton.Tag;
-                int move = Convert.ToInt32(clickedButtonTag);
-                gameLoop.run(move);
-
-                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
-
-                if(gameLoop.checkWinner())
-                {
-                MessageBox.Show("WE HAVE A WINNER");
-                }
-
-                var clickedBorderTag = activeBorder.Tag;
-                
-                
-
-
         }
     }
 }

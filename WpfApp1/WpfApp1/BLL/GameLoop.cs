@@ -8,15 +8,16 @@ using System.Linq;
 
 namespace WpfApp1.BLL
 {
-    class GameLoop
+    public class GameLoop
     {
         private UltimateBoard ultiBoard;
         private bool winner = false;
-        public Player activePlayer = new Player("x");
-        public SubBoard activeBoard;
+        private Player activePlayer = new Player("x");
+        private SubBoard activeBoard;
         private Player player1;
         private Player player2;
         private bool turn = false;
+        private Button clickedButton; 
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -40,39 +41,47 @@ namespace WpfApp1.BLL
 
         public void run(int move)
         {
-            
 
-                Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
-                Button clickedButton = this.activeBoard.getButton(move);
+            checkWinner();
+            Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
+                clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId);
-                
+            
                 if (!this.activeBoard.getButton(clickedButton.ButtonId).getMarker().Equals(""))
                 {
                     Console.WriteLine("Player " + clickedButton.getMarker() + " Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + " already..");
                 }
-                else
-                {
-                    
-                    activeBoard.NumberOfMoves();
-                    clickedButton.setMarker(activePlayer.setMarker());
-                    checkNumberOfMoves();
-                    checkWinner();
-                    activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
-                    Console.WriteLine("Check winner =  " + checkWinner());
-
-                    if (turn)
-                    {
-                        activePlayer = player1;
-                        turn = false;
-                    }
-                    else
-                    {
-                        activePlayer = player2;
-                        turn = true;
-                    }
-
-                }
             
+        }
+
+        public void setMove()
+        {
+            //activeBoard.NumberOfMoves();
+            clickedButton.setMarker(activePlayer.setMarker());
+            if (turn)
+            {
+                activePlayer = player1;
+                turn = false;
+            }
+            else
+            {
+                activePlayer = player2;
+                turn = true;
+            }
+            Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
+            activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
+
+   
+        }
+
+        public bool checkButton(int buttonId)
+        {
+            if (!this.activeBoard.getButton(buttonId).getMarker().Equals(""))
+            {
+                return true;
+            }
+            return false; 
+
         }
         //Check if board is possible to move to
         public SubBoard CheckActiveboard(SubBoard board)
