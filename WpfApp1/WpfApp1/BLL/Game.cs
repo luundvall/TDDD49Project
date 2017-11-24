@@ -8,12 +8,13 @@ namespace WpfApp1.BLL
 {
     class Game
     {
-        public static SubBoard[,] subBoards = new SubBoard[3, 3];
-        public static Player player1;
-        public static Player player2;
+        private SubBoard[,] subBoards = new SubBoard[3, 3];
+        private Player player1;
+        private Player player2;
+        private GameLoop gameLoop;
 
-        static void Main(string[] args)
-        {
+
+        public Game() { 
             int boardId = 1;
             for (int col = 0; col < 3; col++)
             {
@@ -23,14 +24,19 @@ namespace WpfApp1.BLL
                     boardId++;
                 }
             }
-
-            player1 = new Player("X");
-            player2 = new Player("O");
-            GameLoop gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards));
-            gameLoop.run();
+            
+            
+            this.player1 = new Player("X");
+            this.player2 = new Player("O");
+            this.gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards));
         }
 
-        public static Button[,] getButtonBoard(int boardId)
+        public GameLoop getGameLoop()
+        {
+            return this.gameLoop;
+        }
+
+        public Button[,] getButtonBoard(int boardId)
         {
             Button[,] buttonBoard = new Button[3, 3];
 

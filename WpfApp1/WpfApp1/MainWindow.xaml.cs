@@ -21,26 +21,69 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        Game game;
+        GameLoop gameLoop;
+        
+
         public MainWindow()
         {
             InitializeComponent();
-            Game game = new Game();
-            
-
-            
+            game = new Game();
+            foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
+            {
+                string i = grid.Tag.ToString();
+                
+                if(grid.Tag.Equals("1"))
+                {
+                    grid.IsEnabled = true;
+                } else
+                {
+                    grid.IsEnabled = false;
+                }
+            }
         }
 
         private void btnClick(object sender, RoutedEventArgs e) {
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
+            var clickedButtonTag = clickedButton.Tag;
+            foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
+            {
+                string i = grid.Tag.ToString();
+                
+                if (grid.Tag.Equals(clickedButtonTag.ToString()))
+                {
+                    grid.IsEnabled = true;
+                }
+                else
+                {
+                    grid.IsEnabled = false;
+                }
+            }
 
             FrameworkElement activeBorder = (FrameworkElement)((System.Windows.Controls.Button)sender).Parent;
+            var active = activeBorder.Tag;
 
-            var clickedButtonTag = clickedButton.Tag;
+            gameLoop = game.getGameLoop();
 
-            var clickedBorderTag = activeBorder.Tag;
 
-            clickedButton.Content = clickedBorderTag + " " + clickedButtonTag;
-            clickedButton.IsEnabled = false;
+              
+                clickedButtonTag = clickedButton.Tag;
+                int move = Convert.ToInt32(clickedButtonTag);
+                gameLoop.run(move);
+
+                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
+               // clickedButton.IsEnabled = false;
+
+                if(gameLoop.checkWinner())
+                {
+                MessageBox.Show("WE HAVE A WINNER");
+                }
+
+                var clickedBorderTag = activeBorder.Tag;
+                
+                
+
+
         }
     }
 }

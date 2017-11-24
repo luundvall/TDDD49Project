@@ -12,8 +12,8 @@ namespace WpfApp1.BLL
     {
         private UltimateBoard ultiBoard;
         private bool winner = false;
-        private Player activePlayer = new Player("x");
-        private SubBoard activeBoard;
+        public Player activePlayer = new Player("x");
+        public SubBoard activeBoard;
         private Player player1;
         private Player player2;
         private bool turn = false;
@@ -27,16 +27,22 @@ namespace WpfApp1.BLL
             this.player2 = playerO;
         }
 
-
-        public void run()
+        public Player getActivePlayer()
         {
-            int move;
-            while (!this.winner)
-            {
+            return this.activePlayer;
+        }
 
+        public UltimateBoard GetUltimateBoard()
+        {
+            return this.ultiBoard;
+        }
+
+
+        public void run(int move)
+        {
+            
 
                 Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
-                move = Convert.ToInt32(Console.ReadLine());
                 Button clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId);
                 
@@ -66,7 +72,7 @@ namespace WpfApp1.BLL
                     }
 
                 }
-            }
+            
         }
         //Check if board is possible to move to
         public SubBoard CheckActiveboard(SubBoard board)
