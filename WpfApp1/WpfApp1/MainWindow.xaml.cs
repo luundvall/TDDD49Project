@@ -54,7 +54,7 @@ namespace WpfApp1
             
 
             Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
-            if (gameLoop.checkButton(move))
+            if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
             {
                 Console.WriteLine("FAIL TO MAKE MOVE");
             }

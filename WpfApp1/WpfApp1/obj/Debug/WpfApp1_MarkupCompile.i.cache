@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-\\ad.liu.se\home\karlu403\Desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\
+C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\
 WpfApp1
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 21519610241
 
-161472378232
+16-1056931978
 131569487696
 App.xaml;MainWindow.xaml;
 
-False
+True
 

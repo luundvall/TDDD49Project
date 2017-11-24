@@ -44,3 +44,4 @@ C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Deb
 \\ad.liu.se\home\karlu403\Desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
 \\ad.liu.se\home\karlu403\Desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
 \\ad.liu.se\home\karlu403\Desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\App.baml
+C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\App.baml
