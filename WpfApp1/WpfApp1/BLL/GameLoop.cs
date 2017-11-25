@@ -11,7 +11,6 @@ namespace WpfApp1.BLL
     public class GameLoop
     {
         private UltimateBoard ultiBoard;
-        private bool winner = false;
         private Player activePlayer = new Player("x");
         private SubBoard activeBoard;
         private Player player1;
@@ -129,17 +128,19 @@ namespace WpfApp1.BLL
                 for (int x = 0; x < 3; x++)
                 {
                     SubBoard board = listOfBoards[x, y];
-                    if (checkWinnerHorizontal(board))
+                    /*if (checkWinnerHorizontal(board))
                     {
+                        Console.WriteLine("Horizontal winner!!");
                         board.disableBoard(true);
                         return true;
                     }
+                   
                     else if (checkWinnerVertical(board))
                     {
                         board.disableBoard(true);
                         return true;
-                    }
-                    else if (checkWinnerDiagonal(board))
+                    }*/
+                    if (checkWinnerDiagonal(board))
                     {
                         board.disableBoard(true);
                         return true;
@@ -155,18 +156,27 @@ namespace WpfApp1.BLL
 
             Button[,] buttons = board.getButtonBoard();
             Button b1;
-            int count = 0;
+            int countForP1 = 0;
+            int countForP2 = 0;
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
                 {
                     b1 = buttons[y, x];
-                    if (b1.getMarker().Equals(activePlayer.setMarker()))
+                    if (b1.getMarker().Equals("X"))
                     {
-                        count++;
-                        if (count == 3)
+                        countForP1++;
+                        if (countForP1 == 3)
                         {
-                            Console.WriteLine("Vertical winner: " + activePlayer.setMarker() + "remove board: "  + board.getId());
+                            Console.WriteLine("Vertical winner: " + player1.setMarker() + "remove board: "  + board.getId());
+                            return true;
+                        }
+                    } else if (b1.getMarker().Equals("O"))
+                    {
+                        countForP2++;
+                        if(countForP2 == 3)
+                        {
+                            Console.WriteLine("Vertical winner: " + player2.setMarker() + "remove board: " + board.getId());
                             return true;
                         }
                     }
@@ -177,17 +187,31 @@ namespace WpfApp1.BLL
 
         public bool checkWinnerDiagonal(SubBoard board)
         {
+            int countForP1z = 0;
+            int countForP2z = 0;
+            int countForP1 = 0;
+            int countForP2 = 0;
             Button[,] buttons = board.getButtonBoard();
             Button b1;
             int x = 0;
-            int count = 0;
+
             for (int y = 0; y <= 2; y++)
             {
                 b1 = buttons[x, y];
-                if (b1.getMarker().Equals(activePlayer.setMarker()))
+                if (b1.getMarker().Equals("X"))
                 {
-                    count++;
-                    if (count == 3)
+                    countForP1++;
+                    Console.WriteLine(countForP1);
+                    if (countForP1 == 3)
+                    {
+                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
+                        return true;
+                    }
+                } else if (b1.getMarker().Equals("O"))
+                {
+                    countForP2++;
+                    Console.WriteLine(countForP2);
+                    if (countForP2 == 3)
                     {
                         Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
                         return true;
@@ -195,28 +219,67 @@ namespace WpfApp1.BLL
                 }
 
             }
-            return false;
-
-            int xx = 2;
-            int count2 = 0;
 
             for (int y = 0; y <= 2; y++)
             {
-                b1 = buttons[xx, y];
-                if (b1.getMarker().Equals(activePlayer.setMarker()))
+                b1 = buttons[2, y];
+                if (b1.getMarker().Equals("X"))
                 {
-                    count2++;
-                    if (count2 == 3)
+                    countForP1z++;
+                    Console.WriteLine(countForP1z);
+                    if (countForP1z == 3)
                     {
                         Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
+                        return true;
+                    }
+                }
+                else if (b1.getMarker().Equals("O"))
+                {
+                    countForP2z++;
+                    Console.WriteLine(countForP2z);
+                    if (countForP2z == 3)
+                    {
+                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
+                        return true;
                     }
                 }
             }
+            return false;
 
         }
 
         public bool checkWinnerHorizontal(SubBoard board)
         {
+            Button[,] buttons = board.getButtonBoard();
+            Button b1;
+            int countforP1 = 0;
+            int countforP2 = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                countforP1 = 0;
+                countforP2 = 0;
+                for (int j = 0; j < 3; j++)
+                {
+                    b1 = buttons[i, j];
+                    if (b1.getMarker().Equals("X"))
+                    {
+                        countforP1++;
+                        if (countforP1 == 3)
+                        {
+                            return true;
+                        }
+                    }
+                    if (b1.getMarker().Equals("0"))
+                    {
+                        countforP2++;
+                        if (countforP2 == 3)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
             return false;
         }
     }

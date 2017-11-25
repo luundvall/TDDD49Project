@@ -27,13 +27,13 @@ namespace WpfApp1
         public MainWindow()
         {
         }
-            public MainWindow(Game game)
-                {
-            
-                    this.game = game;
-                    InitializeComponent();
+        public MainWindow(Game game)
+        {
 
-                }
+            this.game = game;
+            InitializeComponent();
+
+        }
 
 
         private void btnClick(object sender, RoutedEventArgs e)
@@ -41,27 +41,24 @@ namespace WpfApp1
             gameLoop = game.getGameLoop();
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
             var clickedButtonTag = clickedButton.Tag;
-            
+
             int move = Convert.ToInt32(clickedButtonTag);
-                       try
+            try
             {
                 if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
                 {
 
                 }
-            else
-            {
-                ËnableGrid(clickedButtonTag.ToString());
-                gameLoop.run(move);
-                Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
-                gameLoop.setMove();
-                if (gameLoop.checkWinner())
+                else
                 {
-                    Winner.Text = "The winner is... " + gameLoop.getActivePlayer().setMarker();
+                    ËnableGrid(clickedButtonTag.ToString());
+                    gameLoop.run(move);
+                    Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
+                    gameLoop.setMove();
+                    checkWinner(gameLoop);
+                    clickedButton.Content = gameLoop.getActivePlayer().setMarker();
+                    SetColor(clickedButton);
                 }
-
-                clickedButton.Content = gameLoop.getActivePlayer().setMarker();
-            }
             }
             catch (Exception ex)
             {
@@ -69,10 +66,33 @@ namespace WpfApp1
                 {
                     MessageBox.Show("The button is already taken, try again plz");
                 }
-                if(ex is DisableBoardException)
+                if (ex is DisableBoardException)
                 {
                     MessageBox.Show("The board that you want to move to is disabled");
                 }
+            }
+        }
+
+        public void SetColor(System.Windows.Controls.Button clickedButton)
+        {
+            clickedButton.FontSize = 40;
+            if (gameLoop.getActivePlayer().setMarker().Equals("X"))
+            {
+                clickedButton.Foreground = Brushes.Blue;
+            }
+            else if (gameLoop.getActivePlayer().setMarker().Equals("O"))
+            {
+                clickedButton.Foreground = Brushes.Red;
+            }
+
+        }
+
+        public void checkWinner(GameLoop gameLoop)
+        {
+            if (gameLoop.checkWinner())
+            {
+                Winner.Text = "The winner is... " + gameLoop.getActivePlayer().setMarker();
+
             }
         }
 
