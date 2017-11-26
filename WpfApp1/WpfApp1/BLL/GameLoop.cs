@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace WpfApp1.BLL
 {
@@ -40,9 +39,7 @@ namespace WpfApp1.BLL
 
         public void run(int move)
         {
-
-            
-            Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
+                Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
                 clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId);
             
@@ -50,7 +47,6 @@ namespace WpfApp1.BLL
                 {
                     Console.WriteLine("Player " + clickedButton.getMarker() + " Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + " already..");
                 }
-            
         }
 
         public void setMove()
@@ -73,8 +69,6 @@ namespace WpfApp1.BLL
             Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
            
             activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
-
-   
         }
 
         public bool checkButton(int buttonId) 
@@ -128,20 +122,27 @@ namespace WpfApp1.BLL
                 for (int x = 0; x < 3; x++)
                 {
                     SubBoard board = listOfBoards[x, y];
-                    /*if (checkWinnerHorizontal(board))
+                    if (checkWinnerHorizontal(board))
                     {
                         Console.WriteLine("Horizontal winner!!");
                         board.disableBoard(true);
                         return true;
                     }
-                   
                     else if (checkWinnerVertical(board))
                     {
+                        Console.WriteLine("Vertical winner!!");
                         board.disableBoard(true);
                         return true;
-                    }*/
+                    }
                     if (checkWinnerDiagonal(board))
                     {
+                        Console.WriteLine("Diagonal 1 winner!!");
+                        board.disableBoard(true);
+                        return true;
+                    } else 
+                    if (checkDiagonalWinner2(board))
+                    {
+                        Console.WriteLine("Diagonal 2 winner!!");
                         board.disableBoard(true);
                         return true;
                     }
@@ -187,8 +188,6 @@ namespace WpfApp1.BLL
 
         public bool checkWinnerDiagonal(SubBoard board)
         {
-            int countForP1z = 0;
-            int countForP2z = 0;
             int countForP1 = 0;
             int countForP2 = 0;
             Button[,] buttons = board.getButtonBoard();
@@ -197,7 +196,8 @@ namespace WpfApp1.BLL
 
             for (int y = 0; y <= 2; y++)
             {
-                b1 = buttons[x, y];
+                b1 = buttons[y, y];
+                
                 if (b1.getMarker().Equals("X"))
                 {
                     countForP1++;
@@ -219,17 +219,28 @@ namespace WpfApp1.BLL
                 }
 
             }
+            return false;
 
-            for (int y = 0; y <= 2; y++)
+        }
+
+        public bool checkDiagonalWinner2(SubBoard board)
+        {
+            Button[,] buttons = board.getButtonBoard();
+            Button b1;
+            int countForP1z = 0;
+            int countForP2z = 0;
+            int row = 0;
+            for (int y = 2; y >= 0; y--)
             {
-                b1 = buttons[2, y];
+                b1 = buttons[row, y];
+                row++;
                 if (b1.getMarker().Equals("X"))
                 {
+
                     countForP1z++;
                     Console.WriteLine(countForP1z);
                     if (countForP1z == 3)
                     {
-                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
                         return true;
                     }
                 }
@@ -239,13 +250,11 @@ namespace WpfApp1.BLL
                     Console.WriteLine(countForP2z);
                     if (countForP2z == 3)
                     {
-                        Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
                         return true;
                     }
                 }
             }
             return false;
-
         }
 
         public bool checkWinnerHorizontal(SubBoard board)

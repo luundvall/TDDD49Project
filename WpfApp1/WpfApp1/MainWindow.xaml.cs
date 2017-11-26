@@ -38,11 +38,13 @@ namespace WpfApp1
 
         private void btnClick(object sender, RoutedEventArgs e)
         {
+            
+            Error.Text = "";
             gameLoop = game.getGameLoop();
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
             var clickedButtonTag = clickedButton.Tag;
 
-            int move = Convert.ToInt32(clickedButtonTag);
+                int move = Convert.ToInt32(clickedButtonTag);
             try
             {
                 if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
@@ -62,13 +64,14 @@ namespace WpfApp1
             }
             catch (Exception ex)
             {
+                Error.Foreground = Brushes.Red;
                 if (ex is ButtonTakenException)
                 {
-                    MessageBox.Show("The button is already taken, try again plz");
+                    Error.Text = "Button is taken";
                 }
                 if (ex is DisableBoardException)
                 {
-                    MessageBox.Show("The board that you want to move to is disabled");
+                    Error.Text = "Board is disabled";
                 }
             }
         }
@@ -91,7 +94,8 @@ namespace WpfApp1
         {
             if (gameLoop.checkWinner())
             {
-                Winner.Text = "The winner is... " + gameLoop.getActivePlayer().setMarker();
+                Winner.Foreground = Brushes.LightGreen;
+                Winner.Text = "The winner is " + gameLoop.getActivePlayer().setMarker();
 
             }
         }
