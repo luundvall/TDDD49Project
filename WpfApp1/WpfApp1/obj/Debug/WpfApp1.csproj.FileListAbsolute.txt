@@ -16,11 +16,9 @@ C:\Users\Karl Lundvall\source\repos\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojReso
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe.config
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\bin\Debug\WpfApp1.pdb
-C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\MainWindow.g.cs
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\App.g.cs
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
-C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\MainWindow.baml
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.g.resources
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.Cache
@@ -45,3 +43,5 @@ C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Deb
 \\ad.liu.se\home\karlu403\Desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\App.baml
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\App.baml
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojResolveAssemblyReference.cache
+C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\GUI\MainWindow.g.cs
+C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\GUI\MainWindow.baml

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.BLL
 {
+    [Serializable]
     public class GameLoop
     {
         private UltimateBoard ultiBoard;
@@ -15,7 +16,7 @@ namespace WpfApp1.BLL
         private Player player1;
         private Player player2;
         private bool turn = false;
-        private Button clickedButton; 
+        private Button clickedButton;
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -31,6 +32,16 @@ namespace WpfApp1.BLL
             return this.activePlayer;
         }
 
+        public Player getPlayer1()
+        {
+            return this.player1; 
+        }
+
+        public Player getPlayer2()
+        {
+            return this.player2;
+        }
+
         public UltimateBoard GetUltimateBoard()
         {
             return this.ultiBoard;
@@ -41,7 +52,7 @@ namespace WpfApp1.BLL
         {
                 Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
                 clickedButton = this.activeBoard.getButton(move);
-                Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId);
+                Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + ", checkWinner: "+checkWinner());
             
                 if (!this.activeBoard.getButton(clickedButton.ButtonId).getMarker().Equals(""))
                 {
@@ -121,23 +132,28 @@ namespace WpfApp1.BLL
             {
                 for (int x = 0; x < 3; x++)
                 {
-                    SubBoard board = listOfBoards[x, y];
+                    SubBoard board = listOfBoards[y,x];
+                    
                     if (checkWinnerHorizontal(board))
                     {
                         Console.WriteLine("Horizontal winner!!");
                         board.disableBoard(true);
                         return true;
                     }
+                    
                     else if (checkWinnerVertical(board))
                     {
                         Console.WriteLine("Vertical winner!!");
                         board.disableBoard(true);
                         return true;
                     }
-                    if (checkWinnerDiagonal(board))
+                    
+                    else if
+                        (checkWinnerDiagonal(board))
                     {
                         Console.WriteLine("Diagonal 1 winner!!");
                         board.disableBoard(true);
+                        
                         return true;
                     } else 
                     if (checkDiagonalWinner2(board))
@@ -146,6 +162,7 @@ namespace WpfApp1.BLL
                         board.disableBoard(true);
                         return true;
                     }
+                    
 
                 }
             }
@@ -161,30 +178,40 @@ namespace WpfApp1.BLL
             int countForP2 = 0;
             for (int x = 0; x < 3; x++)
             {
+                countForP2 = 0;
+                countForP1 = 0;
                 for (int y = 0; y < 3; y++)
                 {
-                    b1 = buttons[y, x];
+                    b1 = buttons[x, y];
                     if (b1.getMarker().Equals("X"))
                     {
                         countForP1++;
                         if (countForP1 == 3)
                         {
+                            countForP1 = 0;
                             Console.WriteLine("Vertical winner: " + player1.setMarker() + "remove board: "  + board.getId());
+                            board.disableBoard(true);
                             return true;
                         }
-                    } else if (b1.getMarker().Equals("O"))
-                    {
+                    }
+
+                    if (b1.getMarker().Equals("O"))
+                    
                         countForP2++;
                         if(countForP2 == 3)
                         {
+                            countForP2 = 0;
                             Console.WriteLine("Vertical winner: " + player2.setMarker() + "remove board: " + board.getId());
+                            board.disableBoard(true);
                             return true;
                         }
                     }
                 }
-            }
             return false;
         }
+
+            
+        
 
         public bool checkWinnerDiagonal(SubBoard board)
         {
@@ -201,19 +228,23 @@ namespace WpfApp1.BLL
                 if (b1.getMarker().Equals("X"))
                 {
                     countForP1++;
-                    Console.WriteLine(countForP1);
                     if (countForP1 == 3)
                     {
+                        countForP1 = 0;
                         Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
+                        board.disableBoard(true);
                         return true;
                     }
-                } else if (b1.getMarker().Equals("O"))
+                }
+
+                if (b1.getMarker().Equals("O"))
                 {
                     countForP2++;
-                    Console.WriteLine(countForP2);
                     if (countForP2 == 3)
                     {
+                        countForP2 = 0;
                         Console.WriteLine("Diagonal winner: " + activePlayer.setMarker());
+                        board.disableBoard(true);
                         return true;
                     }
                 }
@@ -238,18 +269,21 @@ namespace WpfApp1.BLL
                 {
 
                     countForP1z++;
-                    Console.WriteLine(countForP1z);
                     if (countForP1z == 3)
                     {
+                        countForP1z = 0;
+                        board.disableBoard(true);
                         return true;
                     }
                 }
-                else if (b1.getMarker().Equals("O"))
+
+                if (b1.getMarker().Equals("O"))
                 {
                     countForP2z++;
-                    Console.WriteLine(countForP2z);
                     if (countForP2z == 3)
                     {
+                        countForP2z = 0;
+                        board.disableBoard(true);
                         return true;
                     }
                 }
@@ -276,14 +310,18 @@ namespace WpfApp1.BLL
                         countforP1++;
                         if (countforP1 == 3)
                         {
+                            countforP1 = 0;
+                            board.disableBoard(true);
                             return true;
                         }
                     }
-                    if (b1.getMarker().Equals("0"))
+                    if (b1.getMarker().Equals("O"))
                     {
                         countforP2++;
                         if (countforP2 == 3)
                         {
+                            countforP2 = 0;
+                            board.disableBoard(true);
                             return true;
                         }
                     }

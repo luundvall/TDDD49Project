@@ -29,7 +29,9 @@ namespace WpfApp1.BLL
             this.player1 = new Player("X");
             this.player2 = new Player("O");
             this.gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards));
+            Console.WriteLine("Created new game");
         }
+
 
         public GameLoop getGameLoop()
         {

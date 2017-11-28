@@ -29,10 +29,8 @@ namespace WpfApp1
         }
         public MainWindow(Game game)
         {
-
             this.game = game;
             InitializeComponent();
-
         }
 
 
@@ -57,9 +55,9 @@ namespace WpfApp1
                     gameLoop.run(move);
                     Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                     gameLoop.setMove();
-                    checkWinner(gameLoop);
                     clickedButton.Content = gameLoop.getActivePlayer().setMarker();
                     SetColor(clickedButton);
+                    checkWinner(gameLoop);
                 }
             }
             catch (Exception ex)
@@ -91,19 +89,53 @@ namespace WpfApp1
         }
 
         public void checkWinner(GameLoop gameLoop)
-        {
+        {    
+            //CheckWinner is true next lap so winner will change all the time after a win has been made
             if (gameLoop.checkWinner())
             {
                 Winner.Foreground = Brushes.LightGreen;
                 Winner.Text = "The winner is " + gameLoop.getActivePlayer().setMarker();
-
+                this.game = new Game();
+                clearButton();
             }
         }
+
+
+        public void clearButton()
+        {
+                foreach(System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
+                {
+                button.Content = "";
+                }
+        }
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
 
         public void ËnableGrid(string tagId)
         {
             foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
             {
+                
                 string i = grid.Tag.ToString();
                 if (grid.Tag.Equals(tagId))
                 {

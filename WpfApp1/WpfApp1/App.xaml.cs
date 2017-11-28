@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml;
+using System.Xml.Serialization;
 using WpfApp1.BLL;
+using WpfApp1.DAL;
 
 namespace WpfApp1
 {
@@ -24,6 +28,10 @@ namespace WpfApp1
             Game game = new Game();
             MainWindow mainWindow = new MainWindow(game);
             mainWindow.ShowDialog();
+            
+
+
+
         }
     }
 }
