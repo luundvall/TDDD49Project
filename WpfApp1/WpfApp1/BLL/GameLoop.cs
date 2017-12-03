@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.DAL;
 
 namespace WpfApp1.BLL
 {
@@ -17,6 +18,7 @@ namespace WpfApp1.BLL
         private Player player2;
         private bool turn = false;
         private Button clickedButton;
+        private WriteToXML writetoXML;
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -60,6 +62,33 @@ namespace WpfApp1.BLL
                 }
         }
 
+
+        public void saveGame()
+        {
+            WriteToXML saveGame = new WriteToXML(this);
+            saveGame.CreateXml();
+        }
+
+        public void deleteGame()
+        {
+            WriteToXML saveGame = new WriteToXML(this);
+            saveGame.deleteFile();
+            Console.WriteLine("Deleted file");
+
+        }
+
+        public Game resumeGame()
+        {
+            LoadFromXML saveGame = new LoadFromXML();
+            return saveGame.load();
+        }
+
+        public bool gameExists()
+        {
+            LoadFromXML saveGame = new LoadFromXML();
+            return saveGame.fileExists();
+        }
+
         public void setMove()
         {
             activeBoard.NumberOfMoves();
@@ -92,7 +121,7 @@ namespace WpfApp1.BLL
             return false; 
 
         }
-        //Check if board is possible to move to
+
         public SubBoard CheckActiveboard(SubBoard board)
         {
             if(board.getDisable() || board.getNumberOfMoves().Equals(9))
@@ -107,8 +136,7 @@ namespace WpfApp1.BLL
             }
             return board;
         }
-
-        //Removes boards that have no buttons left
+        
         public void checkNumberOfMoves()
         {
             SubBoard[,] listOfBoards = ultiBoard.getListOfSub();
@@ -182,7 +210,7 @@ namespace WpfApp1.BLL
                 countForP1 = 0;
                 for (int y = 0; y < 3; y++)
                 {
-                    b1 = buttons[x, y];
+                    b1 = buttons[y, x];
                     if (b1.getMarker().Equals("X"))
                     {
                         countForP1++;
@@ -196,7 +224,6 @@ namespace WpfApp1.BLL
                     }
 
                     if (b1.getMarker().Equals("O"))
-                    
                         countForP2++;
                         if(countForP2 == 3)
                         {
@@ -209,9 +236,6 @@ namespace WpfApp1.BLL
                 }
             return false;
         }
-
-            
-        
 
         public bool checkWinnerDiagonal(SubBoard board)
         {
@@ -329,5 +353,6 @@ namespace WpfApp1.BLL
             }
             return false;
         }
+
     }
 }

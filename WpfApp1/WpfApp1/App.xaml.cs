@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using WpfApp1.BLL;
 using WpfApp1.DAL;
@@ -25,12 +26,15 @@ namespace WpfApp1
         [STAThread]
         public static void Main(string [] args)
         {
+
             Game game = new Game();
+            if(game.getGameLoop().gameExists())
+            {
+                game = game.getGameLoop().resumeGame();
+            }
+
             MainWindow mainWindow = new MainWindow(game);
             mainWindow.ShowDialog();
-            
-
-
 
         }
     }

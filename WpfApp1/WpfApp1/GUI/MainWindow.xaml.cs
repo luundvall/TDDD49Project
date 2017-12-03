@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.BLL;
+using WpfApp1.DAL;
 
 namespace WpfApp1
 {
@@ -29,14 +23,36 @@ namespace WpfApp1
         }
         public MainWindow(Game game)
         {
-            this.game = game;
+           
+            
             InitializeComponent();
+            this.game = game;
+            this.gameLoop = game.getGameLoop();          
+        }
+
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+           MessageBoxResult dr =  MessageBox.Show("Yes, save Game No, No, will not save the game", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (dr == MessageBoxResult.No)
+            {
+                //gameLoop.deleteGame();
+                e.Cancel = false;
+            }
+            else if (dr == MessageBoxResult.Yes)
+            {   
+                gameLoop.saveGame();
+                e.Cancel = false;
+            }  else if (dr == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }    
         }
 
 
         private void btnClick(object sender, RoutedEventArgs e)
         {
-            
+
             Error.Text = "";
             gameLoop = game.getGameLoop();
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
@@ -95,8 +111,19 @@ namespace WpfApp1
             {
                 Winner.Foreground = Brushes.LightGreen;
                 Winner.Text = "The winner is " + gameLoop.getActivePlayer().setMarker();
-                this.game = new Game();
-                clearButton();
+                if (MessageBox.Show("Yes, starts a new game. No, will close the application", "New game?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+
+                    this.Close();
+                }
+                else
+                {
+                    Winner.Text = null;
+                    this.game = new Game();
+                    clearButton();
+
+                }
+
             }
         }
 

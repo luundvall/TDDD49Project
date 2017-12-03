@@ -1,69 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using WpfApp1.BLL;
 
 namespace WpfApp1.DAL
 {
     class WriteToXML
     {
-        private GameLoop gameLoop; 
+        private GameLoop game;
+        private XDocument doc = null;
+        private string path;
 
-        public WriteToXML(GameLoop gameLoop)
+        public WriteToXML()
         {
-            this.gameLoop = gameLoop;
+        }
+
+        public WriteToXML(GameLoop game)
+        {
+            this.path =  System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml";
+            this.game = game;
+            this.doc = new XDocument(new XElement("Root"));
         }
 
         public void CreateXml()
         {
-            XmlWriter xmlWriter = XmlWriter.Create(System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml");
+            this.doc.Root.Add(new XElement("ActivePlayer", game.getActivePlayer().setMarker().ToString()));
 
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("Players");
+            SubBoard[,] subs = game.GetUltimateBoard().getListOfSub();
+            var query = from SubBoard item in subs.Cast<SubBoard>()
+                        select item;
             
-            xmlWriter.WriteStartElement("Player");
-            xmlWriter.WriteAttributeString("Player1", gameLoop.getPlayer1().setMarker().ToString());
-            xmlWriter.WriteString(gameLoop.getPlayer1().setMarker().ToString());
-            xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteStartElement("Player");
-            xmlWriter.WriteAttributeString("Player2", gameLoop.getPlayer2().setMarker().ToString());
-            xmlWriter.WriteString(gameLoop.getPlayer1().setMarker().ToString());
-            xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteStartElement("Next");
-            xmlWriter.WriteStartElement("Active");
-            xmlWriter.WriteString(gameLoop.getActivePlayer().setMarker().ToString());
-            xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteStartElement("ClickedButtons");
-            gameLoop.GetUltimateBoard().getListOfSub();
-
-            foreach(SubBoard s in gameLoop.GetUltimateBoard().getListOfSub())
+            foreach(SubBoard s in query)
             {
-                 
-                for (int x = 0; x<3; x++)
-                { 
-                    if(s.getButtonBoard()[x,x].getMarker().Equals("X"))
-                    {
-                        int ButtonId = s.getButtonBoard()[x, x].ButtonId;
-                        String marker = s.getButtonBoard()[x, x].getMarker();
-                        xmlWriter.WriteEndElement();
-                        
-                    }
-                }            
+                var X = from Button item in s.getButtonBoard().Cast<Button>()
+                          where item.getMarker().Equals("X")
+                          select item;
+                var O = from Button item in s.getButtonBoard().Cast<Button>()
+                        where item.getMarker().Equals("O")
+                        select item;
+
+                foreach (Button b in X)
+                {
+                    //Knapp ska sparas här!
+                    this.doc.Root.Add(new XElement("ButtonID-X", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
+                }
+                foreach (Button b in O)
+                {
+                    //Knapp ska sparas här!
+                    
+                    this.doc.Root.Add(new XElement("ButtonID-O", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
+                }
             }
-            xmlWriter.WriteEndElement();
+            this.doc.Save(System.IO.Path.GetFullPath(path));
+            Console.WriteLine(path);
+        }
 
+        public XDocument getFile()
+        {
+            return this.doc; 
+        }
 
-
-
-
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
+        public void deleteFile()
+        {
+            if (File.Exists(this.path))
+            {
+                System.IO.File.Delete(System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml");
+            }          
         }
     }
 }

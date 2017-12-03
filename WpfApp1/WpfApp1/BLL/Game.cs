@@ -32,7 +32,6 @@ namespace WpfApp1.BLL
             Console.WriteLine("Created new game");
         }
 
-
         public GameLoop getGameLoop()
         {
             return this.gameLoop;
