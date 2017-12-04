@@ -23,20 +23,25 @@ namespace WpfApp1
         }
         public MainWindow(Game game)
         {
-           
-            
             InitializeComponent();
             this.game = game;
-            this.gameLoop = game.getGameLoop();          
+            this.gameLoop = game.getGameLoop();
+            NewGameButton.Content = "Start New Game";
         }
 
+        public void New_Game(object sender, RoutedEventArgs e)
+        {
+            Winner.Text = null;
+            this.game = new Game();
+            clearButton();
+        }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-           MessageBoxResult dr =  MessageBox.Show("Yes, save Game No, No, will not save the game", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+           MessageBoxResult dr =  MessageBox.Show("Do you want to save the game?", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (dr == MessageBoxResult.No)
             {
-                //gameLoop.deleteGame();
+                gameLoop.deleteGame();
                 e.Cancel = false;
             }
             else if (dr == MessageBoxResult.Yes)
@@ -49,13 +54,13 @@ namespace WpfApp1
             }    
         }
 
-
-        private void btnClick(object sender, RoutedEventArgs e)
+            private void btnClick(object sender, RoutedEventArgs e)
         {
-
+            this.Activate();
             Error.Text = "";
             gameLoop = game.getGameLoop();
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
+
             var clickedButtonTag = clickedButton.Tag;
 
                 int move = Convert.ToInt32(clickedButtonTag);
@@ -69,8 +74,8 @@ namespace WpfApp1
                 {
                     ËnableGrid(clickedButtonTag.ToString());
                     gameLoop.run(move);
-                    Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                     gameLoop.setMove();
+                    Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                     clickedButton.Content = gameLoop.getActivePlayer().setMarker();
                     SetColor(clickedButton);
                     checkWinner(gameLoop);
@@ -104,9 +109,59 @@ namespace WpfApp1
 
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
+            UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
+            foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
+            {
+                Grid parent = button.Parent as Grid;
+                string parentString = parent.Tag.ToString();
+                int parentId = Int32.Parse(parentString);
+
+                foreach (SubBoard s in ub.getListOfSub())
+                {
+                    for (int col = 0; col < 3; col++)
+                    {
+                        for (int row = 0; row < 3; row++)
+                        {
+                            BLL.Button b = s.getButtonBoard()[col, row];
+                            if (b.getMarker().Equals("X"))
+                            {
+
+                                string tag = button.Tag.ToString();
+                                int buttonTag = Int32.Parse(tag);
+
+                                if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                {
+                                    button.Content = "X";
+                                    button.FontSize = 40;
+                                    button.Foreground = Brushes.Blue;
+                                }
+                            }
+
+                            if (b.getMarker().Equals("O"))
+                            {
+                                string tag = button.Tag.ToString();
+                                int buttonTag = Int32.Parse(tag);
+
+                                if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                {
+                                    button.Content = "O";
+                                    button.FontSize = 40;
+                                    button.Foreground = Brushes.Red;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            
+        }
+
         public void checkWinner(GameLoop gameLoop)
         {    
-            //CheckWinner is true next lap so winner will change all the time after a win has been made
             if (gameLoop.checkWinner())
             {
                 Winner.Foreground = Brushes.LightGreen;
@@ -126,7 +181,6 @@ namespace WpfApp1
 
             }
         }
-
 
         public void clearButton()
         {
@@ -174,5 +228,6 @@ namespace WpfApp1
                 }
             }
         }
+
     }
 }

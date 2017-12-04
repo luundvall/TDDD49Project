@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Width="760" Height="850">
+        Title="MainWindow" Width="760" Height="850" Loaded="Window_Loaded">
 
     <!-- Start Style -->
     <Window.Resources>
@@ -16,7 +16,7 @@
     <!-- END Style-->
 
     <!-- Start Container Grid -->
-    <Grid>
+    <Grid Tag="20">
         <!--START Header-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -25,7 +25,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Name="Activeplayer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="O start" TextWrapping="Wrap" Margin="0,25,475,0" FontSize="22" Background="White" Padding="10"/>
+        <TextBlock Name="Activeplayer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="0,25,475,0" FontSize="22" Background="White" Padding="10"/>
         <TextBlock Name="Winner" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="400,25,0,0" FontSize="22" Background="White" Padding="10" />
         <TextBlock Name="Error" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="0,25,0,0" FontSize="30" Background="White" Padding="10" />
         <!--END Header-->
@@ -288,6 +288,7 @@
             </Grid>
             <!-- END Bottom Right Grid -->
         </Grid>
+        <Button Name="NewGameButton" Tag="25" Content="Start New Game" Background="White" HorizontalAlignment="Left" Margin="26,16,0,0" VerticalAlignment="Top" Width="130" Click="New_Game"/>
         <!-- END Main Grid -->
     </Grid>
     <!-- END Container Grid -->

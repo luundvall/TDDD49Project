@@ -70,6 +70,7 @@
     <Compile Include="BLL\DisableBoardException.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\GameLoop.cs" />
+    <Compile Include="BLL\NoFileFoundException.cs" />
     <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\SubBoard.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />

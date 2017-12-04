@@ -27,7 +27,8 @@ namespace WpfApp1.DAL
             this.game = game;
             this.doc = new XDocument(new XElement("Root"));
         }
-
+        //skicka med object istället för hela gameloop, felhantering
+        // använd inte void, returna true lr false
         public void CreateXml()
         {
             this.doc.Root.Add(new XElement("ActivePlayer", game.getActivePlayer().setMarker().ToString()));
@@ -47,13 +48,10 @@ namespace WpfApp1.DAL
 
                 foreach (Button b in X)
                 {
-                    //Knapp ska sparas här!
                     this.doc.Root.Add(new XElement("ButtonID-X", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
                 }
                 foreach (Button b in O)
-                {
-                    //Knapp ska sparas här!
-                    
+                {   
                     this.doc.Root.Add(new XElement("ButtonID-O", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
                 }
             }

@@ -35,7 +35,6 @@ namespace WpfApp1
 
             MainWindow mainWindow = new MainWindow(game);
             mainWindow.ShowDialog();
-
         }
     }
 }

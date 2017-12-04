@@ -12,13 +12,12 @@ namespace WpfApp1.BLL
     public class GameLoop
     {
         private UltimateBoard ultiBoard;
-        private Player activePlayer = new Player("x");
+        private Player activePlayer;
         private SubBoard activeBoard;
         private Player player1;
         private Player player2;
-        private bool turn = false;
+        private bool turn = true;
         private Button clickedButton;
-        private WriteToXML writetoXML;
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
@@ -32,6 +31,11 @@ namespace WpfApp1.BLL
         public Player getActivePlayer()
         {
             return this.activePlayer;
+        }
+
+        public void setActivePlayer(Player player)
+        {
+            this.activePlayer = player;
         }
 
         public Player getPlayer1()
@@ -73,20 +77,23 @@ namespace WpfApp1.BLL
         {
             WriteToXML saveGame = new WriteToXML(this);
             saveGame.deleteFile();
-            Console.WriteLine("Deleted file");
-
         }
 
         public Game resumeGame()
         {
             LoadFromXML saveGame = new LoadFromXML();
-            return saveGame.load();
+            if (saveGame.fileExists())
+            {
+                return saveGame.load();
+            }
+            return new Game();
         }
 
         public bool gameExists()
         {
             LoadFromXML saveGame = new LoadFromXML();
-            return saveGame.fileExists();
+                    return saveGame.fileExists();
+            
         }
 
         public void setMove()
@@ -96,15 +103,15 @@ namespace WpfApp1.BLL
             checkWinner();
             if (turn)
             {
-                activePlayer = player1;
+                this.activePlayer = player1;
                 turn = false;
             }
             else
             {
-                activePlayer = player2;
+                this.activePlayer = player2;
                 turn = true;
             }
-            clickedButton.setMarker(activePlayer.setMarker());
+            clickedButton.setMarker(this.activePlayer.setMarker());
 
             Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
            
