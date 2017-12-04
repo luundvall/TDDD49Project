@@ -27,6 +27,7 @@ namespace WpfApp1
             this.game = game;
             this.gameLoop = game.getGameLoop();
             NewGameButton.Content = "Start New Game";
+            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
         }
 
         public void New_Game(object sender, RoutedEventArgs e)
@@ -111,7 +112,6 @@ namespace WpfApp1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
             UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
             foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
             {

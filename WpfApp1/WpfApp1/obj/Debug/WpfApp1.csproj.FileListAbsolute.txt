@@ -44,4 +44,3 @@ C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Deb
 C:\Users\Karl Lundvall\source\repos\TDDD49\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\GUI\MainWindow.baml
 \\ad.liu.se\home\karlu403\desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\GUI\MainWindow.g.cs
 \\ad.liu.se\home\karlu403\desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\GUI\MainWindow.baml
-\\ad.liu.se\home\karlu403\desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csprojResolveAssemblyReference.cache

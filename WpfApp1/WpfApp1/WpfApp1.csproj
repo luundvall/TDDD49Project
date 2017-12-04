@@ -75,7 +75,7 @@
     <Compile Include="BLL\SubBoard.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />
     <Compile Include="DAL\LoadFromXML.cs" />
-    <Compile Include="DAL\WriteToXML.cs" />
+    <Compile Include="DAL\XMLsaver.cs" />
     <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -16,14 +16,13 @@ namespace WpfApp1.BLL
         private SubBoard activeBoard;
         private Player player1;
         private Player player2;
-        private bool turn = true;
         private Button clickedButton;
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
         {
             this.ultiBoard = ub;
             this.activeBoard = ultiBoard.GetSubBoard(1);
-            this.activePlayer = playerX;
+            this.activePlayer = playerO;
             this.player1 = playerX;
             this.player2 = playerO;
         }
@@ -69,13 +68,13 @@ namespace WpfApp1.BLL
 
         public void saveGame()
         {
-            WriteToXML saveGame = new WriteToXML(this);
-            saveGame.CreateXml();
+            XMLsaver saveGame = new XMLsaver();
+            saveGame.CreateXml(this.ultiBoard, this.activePlayer);
         }
 
         public void deleteGame()
         {
-            WriteToXML saveGame = new WriteToXML(this);
+            XMLsaver saveGame = new XMLsaver();
             saveGame.deleteFile();
         }
 
@@ -101,15 +100,13 @@ namespace WpfApp1.BLL
             activeBoard.NumberOfMoves();
             checkNumberOfMoves();
             checkWinner();
-            if (turn)
+            if (this.activePlayer.Equals(this.player1))
             {
-                this.activePlayer = player1;
-                turn = false;
+                this.activePlayer = this.player2;
             }
             else
             {
-                this.activePlayer = player2;
-                turn = true;
+                this.activePlayer = this.player1;
             }
             clickedButton.setMarker(this.activePlayer.setMarker());
 
