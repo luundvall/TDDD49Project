@@ -70,7 +70,6 @@ namespace WpfApp1.DAL
                     int board = int.Parse(s.boardId);
                     int button = int.Parse(s.buttonId);
                     game.getGameLoop().GetUltimateBoard().GetSubBoard(board).getButton(button).setMarker("X");
-                    Console.WriteLine("settet marker X on board: " + board + ", on button: " + button);
                 }
 
                 
@@ -80,7 +79,6 @@ namespace WpfApp1.DAL
                     int board = int.Parse(r.boardId);
                     int button = int.Parse(r.buttonId);
                     game.getGameLoop().GetUltimateBoard().GetSubBoard(board).getButton(button).setMarker("O");
-                    Console.WriteLine("setted marker O on board: " + board + ", on button: " + button);
                 }
 
              

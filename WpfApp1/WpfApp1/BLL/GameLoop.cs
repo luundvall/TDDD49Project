@@ -101,9 +101,7 @@ namespace WpfApp1.BLL
         }
 
         public void setMove()
-        {
-
-
+        { 
             activeBoard.NumberOfMoves();
             checkNumberOfMoves();
             checkWinner();

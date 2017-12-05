@@ -35,7 +35,9 @@ namespace WpfApp1
         public void New_Game(object sender, RoutedEventArgs e)
         {
             Winner.Text = null;
+           
             this.game = new Game();
+            ËnableGrid("1");
             clearButton();
         }
 
@@ -117,7 +119,7 @@ namespace WpfApp1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            NewGameButton.Content = "Start New Game";
             ËnableGrid(gameLoop.getActiveBoard().getId().ToString());
             if (gameLoop.gameExists())
             {
@@ -180,14 +182,26 @@ namespace WpfApp1
 
         }
         
-
-
         public void checkWinner(GameLoop gameLoop)
         {
+            Xwinner1.Visibility = System.Windows.Visibility.Hidden;
+            Xwinner2.Visibility = System.Windows.Visibility.Hidden;
+            Owinner.Visibility = System.Windows.Visibility.Hidden;
             if (gameLoop.checkWinner())
             {
+                ËnableGrid("1");
                 Winner.Foreground = Brushes.LightGreen;
-                Winner.Text = "The winner is " + gameLoop.getActivePlayer().setMarker();
+                Winner.Text = " is the Winner!!";
+
+                if(gameLoop.getActivePlayer().setMarker().Equals("X"))
+                {
+                    Xwinner1.Visibility = System.Windows.Visibility.Visible;
+                    Xwinner2.Visibility = System.Windows.Visibility.Visible;
+
+                } else if (gameLoop.getActivePlayer().setMarker().Equals("O"))
+                {
+                    Owinner.Visibility = System.Windows.Visibility.Visible; 
+                }
                 if (MessageBox.Show("Yes, starts a new game. No, will close the application", "New game?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
 

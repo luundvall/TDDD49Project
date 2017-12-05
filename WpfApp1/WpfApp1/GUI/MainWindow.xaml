@@ -38,9 +38,13 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="40,0,0,0" Name="Activeplayer" Grid.Row="0" Grid.Column="0" Text="" FontSize="22" Background="White" Width="180"/>
-            <TextBlock Name="Winner" Grid.Row="0" Grid.Column="1" Text="" FontSize="22" Background="White" Width="180"/>
-            <TextBlock Name="Error" Grid.Row="0" Grid.Column="2" Text="" FontSize="22" Background="White" Width="180"/>
-            <Button Name="NewGameButton" Tag="25" Grid.Row="0" Grid.Column="3" Content="Start New Game" Background="White" Width="130" Click="New_Game"/>
+            <TextBlock Name="Winner" Grid.Row="0" Grid.Column="2" Text="" FontSize="22" Background="White" Width="180" Padding="45,0,0,0"/>
+            <Ellipse Name="Owinner" Grid.Column="2"  Grid.Row="0" Visibility="Hidden" Fill="White" Stroke="LightGreen" StrokeThickness="3" Canvas.Left="30" Canvas.Top="30" Width="30" Height="30" Margin="-150,-5,0,0"/>
+            <Line Name="Xwinner1" Grid.Row="0" Grid.Column="2" Visibility="Hidden" X1="0" Y1="0" X2="25" Y2="25" Stroke="LightGreen" StrokeThickness="3" />
+            <Line Name="Xwinner2" Grid.Row="0" Grid.Column="2" Visibility="Hidden"  X1="0" Y1="25" X2="25" Y2="0" Stroke="LightGreen" StrokeThickness="3" />
+   
+            <TextBlock Name="Error" Grid.Row="0" Grid.Column="1" Text="" FontSize="22" Background="White" Width="180"/>
+            <Button Name="NewGameButton" Tag="25" Grid.Row="0" Grid.Column="3" Foreground="Black" Content="Start New Game" Background="White" Width="130" Click="New_Game"/>
 
         </Grid>
   

@@ -22,8 +22,6 @@ namespace WpfApp1.DAL
             this.path =  System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml";
             this.doc = new XDocument(new XElement("Root"));
         }
-        //skicka med object istället för hela gameloop, felhantering
-        // använd inte void, returna true lr false
         public bool CreateXml(UltimateBoard ultiBoard, Player activePlayer)
         {
             try
