@@ -17,7 +17,6 @@ namespace WpfApp1.BLL
         {
             this.buttonBoard = bb;
             this.id = id;
-            this.numberOfMoves = numberOfMoves;
             this.disable = false;
         }
 
@@ -63,10 +62,6 @@ namespace WpfApp1.BLL
 
         public bool getDisable()
         {
-            if(this.disable.Equals(true))
-            {
-                throw new DisableBoardException();
-            }
             return this.disable;
         }
     }

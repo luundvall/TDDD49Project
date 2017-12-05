@@ -22,9 +22,14 @@ namespace WpfApp1.BLL
         {
             this.ultiBoard = ub;
             this.activeBoard = ultiBoard.GetSubBoard(1);
-            this.activePlayer = playerO;
+            this.activePlayer = playerX;
             this.player1 = playerX;
             this.player2 = playerO;
+        }
+
+        public SubBoard getActiveBoard()
+        {
+            return this.activeBoard; 
         }
 
         public Player getActivePlayer()
@@ -51,7 +56,6 @@ namespace WpfApp1.BLL
         {
             return this.ultiBoard;
         }
-
 
         public void run(int move)
         {
@@ -83,6 +87,7 @@ namespace WpfApp1.BLL
             LoadFromXML saveGame = new LoadFromXML();
             if (saveGame.fileExists())
             {
+               
                 return saveGame.load();
             }
             return new Game();
@@ -97,9 +102,17 @@ namespace WpfApp1.BLL
 
         public void setMove()
         {
+
+
             activeBoard.NumberOfMoves();
             checkNumberOfMoves();
             checkWinner();
+
+            clickedButton.setMarker(this.activePlayer.setMarker());
+
+            Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
+           
+            activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
             if (this.activePlayer.Equals(this.player1))
             {
                 this.activePlayer = this.player2;
@@ -108,11 +121,7 @@ namespace WpfApp1.BLL
             {
                 this.activePlayer = this.player1;
             }
-            clickedButton.setMarker(this.activePlayer.setMarker());
 
-            Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
-           
-            activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
         }
 
         public bool checkButton(int buttonId) 

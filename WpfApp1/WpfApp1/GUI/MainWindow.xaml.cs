@@ -6,7 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WpfApp1.BLL;
-using WpfApp1.DAL;
+using System.Drawing;
+
 
 namespace WpfApp1
 {
@@ -17,6 +18,7 @@ namespace WpfApp1
     {
         private Game game = null;
         private GameLoop gameLoop;
+
 
         public MainWindow()
         {
@@ -37,25 +39,28 @@ namespace WpfApp1
             clearButton();
         }
 
+
+
         protected override void OnClosing(CancelEventArgs e)
         {
-           MessageBoxResult dr =  MessageBox.Show("Do you want to save the game?", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult dr = MessageBox.Show("Do you want to save the game?", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (dr == MessageBoxResult.No)
             {
                 gameLoop.deleteGame();
                 e.Cancel = false;
             }
             else if (dr == MessageBoxResult.Yes)
-            {   
+            {
                 gameLoop.saveGame();
                 e.Cancel = false;
-            }  else if (dr == MessageBoxResult.Cancel)
+            }
+            else if (dr == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
-            }    
+            }
         }
 
-            private void btnClick(object sender, RoutedEventArgs e)
+        private void btnClick(object sender, RoutedEventArgs e)
         {
             this.Activate();
             Error.Text = "";
@@ -63,8 +68,12 @@ namespace WpfApp1
             System.Windows.Controls.Button clickedButton = (System.Windows.Controls.Button)sender;
 
             var clickedButtonTag = clickedButton.Tag;
+            string tag = clickedButtonTag.ToString();
+            
+          
+            int move = Convert.ToInt32(clickedButtonTag);
+            int boardId = Int32.Parse(tag);
 
-                int move = Convert.ToInt32(clickedButtonTag);
             try
             {
                 if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
@@ -89,10 +98,6 @@ namespace WpfApp1
                 {
                     Error.Text = "Button is taken";
                 }
-                if (ex is DisableBoardException)
-                {
-                    Error.Text = "Board is disabled";
-                }
             }
         }
 
@@ -112,6 +117,21 @@ namespace WpfApp1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+            ËnableGrid(gameLoop.getActiveBoard().getId().ToString());
+            if (gameLoop.gameExists())
+            {
+                MessageBoxResult dr = MessageBox.Show("Do you want to resume the game?", "Resume", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (dr == MessageBoxResult.Yes)
+                {
+                    gameLoop.resumeGame();
+                }
+                else if (dr == MessageBoxResult.No)
+                {
+                    this.game = new Game();
+                }
+            }
+
             UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
             foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
             {
@@ -157,11 +177,13 @@ namespace WpfApp1
 
                 }
             }
-            
+
         }
+        
+
 
         public void checkWinner(GameLoop gameLoop)
-        {    
+        {
             if (gameLoop.checkWinner())
             {
                 Winner.Foreground = Brushes.LightGreen;
@@ -184,10 +206,10 @@ namespace WpfApp1
 
         public void clearButton()
         {
-                foreach(System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
-                {
+            foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
+            {
                 button.Content = "";
-                }
+            }
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -197,7 +219,7 @@ namespace WpfApp1
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
                 {
                     DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    
+
                     if (child != null && child is T)
                     {
                         yield return (T)child;
@@ -214,9 +236,10 @@ namespace WpfApp1
 
         public void ËnableGrid(string tagId)
         {
+            int boardId = Int32.Parse(tagId); 
             foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
             {
-                
+
                 string i = grid.Tag.ToString();
                 if (grid.Tag.Equals(tagId))
                 {
@@ -227,6 +250,7 @@ namespace WpfApp1
                     grid.IsEnabled = false;
                 }
             }
+
         }
 
     }

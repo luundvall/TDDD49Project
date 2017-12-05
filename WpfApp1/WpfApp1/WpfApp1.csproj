@@ -67,13 +67,13 @@
     </Compile>
     <Compile Include="BLL\Button.cs" />
     <Compile Include="BLL\ButtonTakenException.cs" />
-    <Compile Include="BLL\DisableBoardException.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\GameLoop.cs" />
     <Compile Include="BLL\NoFileFoundException.cs" />
     <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\SubBoard.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />
+    <Compile Include="DAL\WrongFormatException.cs" />
     <Compile Include="DAL\LoadFromXML.cs" />
     <Compile Include="DAL\XMLsaver.cs" />
     <Compile Include="GUI\MainWindow.xaml.cs">
@@ -109,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\SavedData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GUI\img\O.gif" />
+    <Resource Include="GUI\img\X.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

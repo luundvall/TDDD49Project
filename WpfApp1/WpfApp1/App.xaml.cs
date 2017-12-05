@@ -28,11 +28,6 @@ namespace WpfApp1
         {
 
             Game game = new Game();
-            if(game.getGameLoop().gameExists())
-            {
-                game = game.getGameLoop().resumeGame();
-            }
-
             MainWindow mainWindow = new MainWindow(game);
             mainWindow.ShowDialog();
         }

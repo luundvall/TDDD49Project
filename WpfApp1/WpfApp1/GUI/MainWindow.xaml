@@ -19,19 +19,35 @@
     <Grid Tag="20">
         <!--START Header-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="572.522" />
+            <ColumnDefinition Width="153.478"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Name="Activeplayer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="0,25,475,0" FontSize="22" Background="White" Padding="10"/>
-        <TextBlock Name="Winner" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="400,25,0,0" FontSize="22" Background="White" Padding="10" />
-        <TextBlock Name="Error" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="0,25,0,0" FontSize="30" Background="White" Padding="10" />
-        <!--END Header-->
+        <Grid  Tag="30" Width="auto" Grid.ColumnSpan="2" Margin="0,30,-24,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto">
+                </ColumnDefinition>
+                <ColumnDefinition Width="auto">
+                </ColumnDefinition>
+                <ColumnDefinition Width="auto">
+                </ColumnDefinition>
+                <ColumnDefinition Width="auto">
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="40,0,0,0" Name="Activeplayer" Grid.Row="0" Grid.Column="0" Text="" FontSize="22" Background="White" Width="180"/>
+            <TextBlock Name="Winner" Grid.Row="0" Grid.Column="1" Text="" FontSize="22" Background="White" Width="180"/>
+            <TextBlock Name="Error" Grid.Row="0" Grid.Column="2" Text="" FontSize="22" Background="White" Width="180"/>
+            <Button Name="NewGameButton" Tag="25" Grid.Row="0" Grid.Column="3" Content="Start New Game" Background="White" Width="130" Click="New_Game"/>
+
+        </Grid>
+  
+            <!--END Header-->
 
         <!--START Main Grid-->
-        <Grid Name="mainGrid" Grid.Row="1" Grid.Column="0" Background="Black" Width="700" Height="700" Margin="25,0,0,0">
+        <Grid Name="mainGrid" Grid.Row="1" Grid.Column="0" Background="Black" Width="700" Height="700" Margin="26,17,0,17" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -288,7 +304,6 @@
             </Grid>
             <!-- END Bottom Right Grid -->
         </Grid>
-        <Button Name="NewGameButton" Tag="25" Content="Start New Game" Background="White" HorizontalAlignment="Left" Margin="26,16,0,0" VerticalAlignment="Top" Width="130" Click="New_Game"/>
         <!-- END Main Grid -->
     </Grid>
     <!-- END Container Grid -->
