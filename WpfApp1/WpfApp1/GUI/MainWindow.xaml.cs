@@ -11,9 +11,6 @@ using System.Drawing;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private Game game = null;
@@ -28,37 +25,35 @@ namespace WpfApp1
             InitializeComponent();
             this.game = game;
             this.gameLoop = game.getGameLoop();
-            NewGameButton.Content = "Start New Game";
-            Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
         }
 
         public void New_Game(object sender, RoutedEventArgs e)
         {
             Winner.Text = null;
-           
             this.game = new Game();
             ËnableGrid("1");
             clearButton();
         }
-
-
-
+        
         protected override void OnClosing(CancelEventArgs e)
         {
-            MessageBoxResult dr = MessageBox.Show("Do you want to save the game?", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (dr == MessageBoxResult.No)
+            if (!gameLoop.checkWinner())
             {
-                gameLoop.deleteGame();
-                e.Cancel = false;
-            }
-            else if (dr == MessageBoxResult.Yes)
-            {
-                gameLoop.saveGame();
-                e.Cancel = false;
-            }
-            else if (dr == MessageBoxResult.Cancel)
-            {
-                e.Cancel = true;
+                MessageBoxResult dr = MessageBox.Show("Do you want to save the game?", "Save game?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (dr == MessageBoxResult.No)
+                {
+                    gameLoop.deleteGame();
+                    e.Cancel = false;
+                }
+                else if (dr == MessageBoxResult.Yes)
+                {
+                    gameLoop.saveGame();
+                    e.Cancel = false;
+                }
+                else if (dr == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -71,8 +66,6 @@ namespace WpfApp1
 
             var clickedButtonTag = clickedButton.Tag;
             string tag = clickedButtonTag.ToString();
-            
-          
             int move = Convert.ToInt32(clickedButtonTag);
             int boardId = Int32.Parse(tag);
 
@@ -84,13 +77,14 @@ namespace WpfApp1
                 }
                 else
                 {
+                    Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                     ËnableGrid(clickedButtonTag.ToString());
                     gameLoop.run(move);
                     gameLoop.setMove();
-                    Activeplayer.Text = "Active player is: " + gameLoop.getActivePlayer().setMarker();
                     clickedButton.Content = gameLoop.getActivePlayer().setMarker();
                     SetColor(clickedButton);
                     checkWinner(gameLoop);
+
                 }
             }
             catch (Exception ex)
@@ -126,57 +120,57 @@ namespace WpfApp1
                 MessageBoxResult dr = MessageBox.Show("Do you want to resume the game?", "Resume", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (dr == MessageBoxResult.Yes)
                 {
-                    gameLoop.resumeGame();
+                    this.game = gameLoop.resumeGame();
+
+                    UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
+                    foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
+                    {
+                        Grid parent = button.Parent as Grid;
+                        string parentString = parent.Tag.ToString();
+                        int parentId = Int32.Parse(parentString);
+
+                        foreach (SubBoard s in ub.getListOfSub())
+                        {
+                            for (int col = 0; col < 3; col++)
+                            {
+                                for (int row = 0; row < 3; row++)
+                                {
+                                    BLL.Button b = s.getButtonBoard()[col, row];
+                                    if (b.getMarker().Equals("X"))
+                                    {
+
+                                        string tag = button.Tag.ToString();
+                                        int buttonTag = Int32.Parse(tag);
+
+                                        if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                        {
+                                            button.Content = "X";
+                                            button.FontSize = 40;
+                                            button.Foreground = Brushes.Blue;
+                                        }
+                                    }
+
+                                    if (b.getMarker().Equals("O"))
+                                    {
+                                        string tag = button.Tag.ToString();
+                                        int buttonTag = Int32.Parse(tag);
+
+                                        if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                        {
+                                            button.Content = "O";
+                                            button.FontSize = 40;
+                                            button.Foreground = Brushes.Red;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
                 }
                 else if (dr == MessageBoxResult.No)
                 {
                     this.game = new Game();
-                }
-            }
-
-            UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
-            foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
-            {
-                Grid parent = button.Parent as Grid;
-                string parentString = parent.Tag.ToString();
-                int parentId = Int32.Parse(parentString);
-
-                foreach (SubBoard s in ub.getListOfSub())
-                {
-                    for (int col = 0; col < 3; col++)
-                    {
-                        for (int row = 0; row < 3; row++)
-                        {
-                            BLL.Button b = s.getButtonBoard()[col, row];
-                            if (b.getMarker().Equals("X"))
-                            {
-
-                                string tag = button.Tag.ToString();
-                                int buttonTag = Int32.Parse(tag);
-
-                                if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
-                                {
-                                    button.Content = "X";
-                                    button.FontSize = 40;
-                                    button.Foreground = Brushes.Blue;
-                                }
-                            }
-
-                            if (b.getMarker().Equals("O"))
-                            {
-                                string tag = button.Tag.ToString();
-                                int buttonTag = Int32.Parse(tag);
-
-                                if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
-                                {
-                                    button.Content = "O";
-                                    button.FontSize = 40;
-                                    button.Foreground = Brushes.Red;
-                                }
-                            }
-                        }
-                    }
-
                 }
             }
 
@@ -222,7 +216,15 @@ namespace WpfApp1
         {
             foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
             {
-                button.Content = "";
+                if(button.Tag.ToString().Equals("25"))
+                {
+                    button.Content = "Start New Game";
+                } else
+                {
+                    button.Content = "";
+                }
+               
+
             }
         }
 

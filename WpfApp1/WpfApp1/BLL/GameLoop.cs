@@ -59,6 +59,7 @@ namespace WpfApp1.BLL
 
         public void run(int move)
         {
+
                 Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
                 clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + ", checkWinner: "+checkWinner());
@@ -67,6 +68,15 @@ namespace WpfApp1.BLL
                 {
                     Console.WriteLine("Player " + clickedButton.getMarker() + " Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + " already..");
                 }
+
+            if (this.activePlayer.Equals(this.player1))
+            {
+                this.activePlayer = this.player2;
+            }
+            else
+            {
+                this.activePlayer = this.player1;
+            }
         }
 
 
@@ -87,10 +97,11 @@ namespace WpfApp1.BLL
             LoadFromXML saveGame = new LoadFromXML();
             if (saveGame.fileExists())
             {
-               
                 return saveGame.load();
+            } else
+            {
+                return new Game();
             }
-            return new Game();
         }
 
         public bool gameExists()
@@ -111,14 +122,6 @@ namespace WpfApp1.BLL
             Console.WriteLine("Activeplayer is: " + activePlayer.setMarker());
            
             activeBoard = CheckActiveboard(ultiBoard.GetSubBoard(clickedButton.ButtonId));
-            if (this.activePlayer.Equals(this.player1))
-            {
-                this.activePlayer = this.player2;
-            }
-            else
-            {
-                this.activePlayer = this.player1;
-            }
 
         }
 
