@@ -73,6 +73,7 @@
     <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\SubBoard.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />
+    <Compile Include="DAL\NoSavedDataException.cs" />
     <Compile Include="DAL\WrongFormatException.cs" />
     <Compile Include="DAL\LoadFromXML.cs" />
     <Compile Include="DAL\XMLsaver.cs" />

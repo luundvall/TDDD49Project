@@ -16,7 +16,6 @@ namespace WpfApp1
         private Game game = null;
         private GameLoop gameLoop;
 
-
         public MainWindow()
         {
         }
@@ -196,9 +195,8 @@ namespace WpfApp1
                 {
                     Owinner.Visibility = System.Windows.Visibility.Visible; 
                 }
-                if (MessageBox.Show("Yes, starts a new game. No, will close the application", "New game?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                if (MessageBox.Show("Do you want to start a new game?", "New game", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
-
                     this.Close();
                 }
                 else
@@ -206,7 +204,6 @@ namespace WpfApp1
                     Winner.Text = null;
                     this.game = new Game();
                     clearButton();
-
                 }
 
             }
@@ -223,8 +220,6 @@ namespace WpfApp1
                 {
                     button.Content = "";
                 }
-               
-
             }
         }
 
@@ -249,13 +244,11 @@ namespace WpfApp1
             }
         }
 
-
         public void ËnableGrid(string tagId)
         {
             int boardId = Int32.Parse(tagId); 
             foreach (FrameworkElement grid in mainGrid.Children.OfType<Grid>())
             {
-
                 string i = grid.Tag.ToString();
                 if (grid.Tag.Equals(tagId))
                 {
@@ -266,7 +259,6 @@ namespace WpfApp1
                     grid.IsEnabled = false;
                 }
             }
-
         }
 
     }

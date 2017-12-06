@@ -17,14 +17,18 @@ namespace WpfApp1.BLL
         private Player player1;
         private Player player2;
         private Button clickedButton;
+        private XMLsaver xmlsaver;
+        private LoadFromXML loadFromXML;
 
-        public GameLoop(Player playerX, Player playerO, UltimateBoard ub)
+        public GameLoop(Player playerX, Player playerO, UltimateBoard ub, XMLsaver xmlsaver, LoadFromXML loadFromXML)
         {
             this.ultiBoard = ub;
             this.activeBoard = ultiBoard.GetSubBoard(1);
             this.activePlayer = playerX;
             this.player1 = playerX;
             this.player2 = playerO;
+            this.xmlsaver = xmlsaver;
+            this.loadFromXML = loadFromXML; 
         }
 
         public SubBoard getActiveBoard()
@@ -59,7 +63,6 @@ namespace WpfApp1.BLL
 
         public void run(int move)
         {
-
                 Console.WriteLine("Active player is: " + this.activePlayer.setMarker() + ", Activeboard is: " + this.activeBoard.getId());
                 clickedButton = this.activeBoard.getButton(move);
                 Console.WriteLine("Clicked on button: " + clickedButton.ButtonId + ", on board:  " + clickedButton.BoardId + ", checkWinner: "+checkWinner());
@@ -79,25 +82,22 @@ namespace WpfApp1.BLL
             }
         }
 
-
         public void saveGame()
         {
-            XMLsaver saveGame = new XMLsaver();
-            saveGame.CreateXml(this.ultiBoard, this.activePlayer);
+            this.xmlsaver.CreateXml(this.ultiBoard, this.activePlayer);
         }
 
         public void deleteGame()
         {
-            XMLsaver saveGame = new XMLsaver();
-            saveGame.deleteFile();
+            this.xmlsaver.deleteFile();
         }
 
         public Game resumeGame()
         {
-            LoadFromXML saveGame = new LoadFromXML();
-            if (saveGame.fileExists())
+            
+            if (this.loadFromXML.fileExists())
             {
-                return saveGame.load();
+                return this.loadFromXML.load();
             } else
             {
                 return new Game();
@@ -106,9 +106,7 @@ namespace WpfApp1.BLL
 
         public bool gameExists()
         {
-            LoadFromXML saveGame = new LoadFromXML();
-                    return saveGame.fileExists();
-            
+              return this.loadFromXML.fileExists();
         }
 
         public void setMove()
@@ -204,8 +202,6 @@ namespace WpfApp1.BLL
                         board.disableBoard(true);
                         return true;
                     }
-                    
-
                 }
             }
             return false;
@@ -246,8 +242,8 @@ namespace WpfApp1.BLL
                             board.disableBoard(true);
                             return true;
                         }
-                    }
                 }
+            }
             return false;
         }
 
@@ -286,10 +282,8 @@ namespace WpfApp1.BLL
                         return true;
                     }
                 }
-
             }
             return false;
-
         }
 
         public bool checkDiagonalWinner2(SubBoard board)
@@ -305,7 +299,6 @@ namespace WpfApp1.BLL
                 row++;
                 if (b1.getMarker().Equals("X"))
                 {
-
                     countForP1z++;
                     if (countForP1z == 3)
                     {
@@ -367,6 +360,5 @@ namespace WpfApp1.BLL
             }
             return false;
         }
-
     }
 }

@@ -10,7 +10,7 @@ using WpfApp1.BLL;
 
 namespace WpfApp1.DAL
 {
-    class LoadFromXML
+   public class LoadFromXML
     {
         private string path;
 

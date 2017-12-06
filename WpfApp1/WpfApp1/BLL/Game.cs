@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.DAL;
 
 namespace WpfApp1.BLL
 {
@@ -11,6 +12,8 @@ namespace WpfApp1.BLL
         private SubBoard[,] subBoards = new SubBoard[3, 3];
         private Player player1;
         private Player player2;
+        private XMLsaver xmlsaver;
+        private LoadFromXML loadFromXML;
         private GameLoop gameLoop;
 
 
@@ -28,7 +31,9 @@ namespace WpfApp1.BLL
             
             this.player1 = new Player("X");
             this.player2 = new Player("O");
-            this.gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards));
+            this.xmlsaver = new XMLsaver();
+            this.loadFromXML = new LoadFromXML();
+            this.gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards), xmlsaver, loadFromXML);
             Console.WriteLine("Created new game");
         }
 

@@ -11,7 +11,7 @@ using WpfApp1.BLL;
 
 namespace WpfApp1.DAL
 {
-    class XMLsaver
+    public class XMLsaver
     {
         private GameLoop game;
         private XDocument doc = null;
@@ -32,24 +32,26 @@ namespace WpfApp1.DAL
                 var query = from SubBoard item in subs.Cast<SubBoard>()
                             select item;
 
-                foreach (SubBoard s in query)
-                {
-                    var X = from Button item in s.getButtonBoard().Cast<Button>()
-                            where item.getMarker().Equals("X")
-                            select item;
-                    var O = from Button item in s.getButtonBoard().Cast<Button>()
-                            where item.getMarker().Equals("O")
-                            select item;
+                    foreach (SubBoard s in query)
+                    {
+                        var X = from Button item in s.getButtonBoard().Cast<Button>()
+                                where item.getMarker().Equals("X")
+                                select item;
+                        var O = from Button item in s.getButtonBoard().Cast<Button>()
+                                where item.getMarker().Equals("O")
+                                select item;
 
-                    foreach (Button b in X)
-                    {
-                        this.doc.Root.Add(new XElement("ButtonID-X", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
+
+                        foreach (Button b in X)
+                        {
+                            this.doc.Root.Add(new XElement("ButtonID-X", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
+                        }
+                        foreach (Button b in O)
+                        {
+                            this.doc.Root.Add(new XElement("ButtonID-O", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
+                        }
                     }
-                    foreach (Button b in O)
-                    {
-                        this.doc.Root.Add(new XElement("ButtonID-O", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
-                    }
-                }
+
 
                 this.doc.Save(System.IO.Path.GetFullPath(path));
                 return true;

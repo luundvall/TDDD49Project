@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Root>
-  <ActivePlayer>X</ActivePlayer>
-  <ButtonID-O BoardId="1">2</ButtonID-O>
-  <ButtonID-O BoardId="1">3</ButtonID-O>
-  <ButtonID-X BoardId="2">5</ButtonID-X>
-  <ButtonID-X BoardId="3">1</ButtonID-X>
-</Root>
