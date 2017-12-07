@@ -22,14 +22,8 @@ namespace WpfApp1.DAL
         public Game load()
         {
             Game game = new Game();
-            try
-            {
-                
+
                 XDocument loadedFile = XDocument.Load(System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml");
-                if (loadedFile == null)
-                {
-                    throw new NoSavedDataException("No file to be found in the file system");
-                }
                 
                 var q = from b in loadedFile.Descendants("Root")
                         select new
@@ -72,7 +66,6 @@ namespace WpfApp1.DAL
                     game.getGameLoop().GetUltimateBoard().GetSubBoard(board).getButton(button).setMarker("X");
                     Console.WriteLine("setted marker X on " + board + ", on button " + button);
                 }
-
                 
                 foreach (var r in allO)
                 {
@@ -82,17 +75,7 @@ namespace WpfApp1.DAL
                     game.getGameLoop().GetUltimateBoard().GetSubBoard(board).getButton(button).setMarker("O");
                     Console.WriteLine("setted marker X on " + board + ", on button " + button);
                 }
-
-             
                 return game;
-            } catch (Exception ex)
-            {
-                if (ex is NoSavedDataException)
-                {
-                    return game; 
-                }
-            }
-            return game;
         }
 
         public bool fileExists()
@@ -101,9 +84,8 @@ namespace WpfApp1.DAL
             {
                 return true;
             }
-            
+            throw new NoFileFoundException("No file could be found in the file system");
             return false;
-            throw new NoFileFoundException("No file to be found");
         }
     }
 }

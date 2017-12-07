@@ -24,8 +24,6 @@ namespace WpfApp1.DAL
         }
         public bool CreateXml(UltimateBoard ultiBoard, Player activePlayer)
         {
-            try
-            {
                 this.doc.Root.Add(new XElement("ActivePlayer", activePlayer.setMarker().ToString()));
 
                 SubBoard[,] subs = ultiBoard.getListOfSub();
@@ -40,8 +38,8 @@ namespace WpfApp1.DAL
                         var O = from Button item in s.getButtonBoard().Cast<Button>()
                                 where item.getMarker().Equals("O")
                                 select item;
-
-
+                    Console.WriteLine(X.Count().Equals(0) + ", " + X.Count().Equals(0));
+    
                         foreach (Button b in X)
                         {
                             this.doc.Root.Add(new XElement("ButtonID-X", b.ButtonId.ToString(), new XAttribute("BoardId", b.BoardId.ToString())));
@@ -55,10 +53,7 @@ namespace WpfApp1.DAL
 
                 this.doc.Save(System.IO.Path.GetFullPath(path));
                 return true;
-            } catch (FileFormatException e)
-            {
-                return false;
-            }
+
         }
 
         public XDocument getFile()
