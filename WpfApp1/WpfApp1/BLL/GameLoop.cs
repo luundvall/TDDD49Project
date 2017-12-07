@@ -100,6 +100,7 @@ namespace WpfApp1.BLL
                 return this.loadFromXML.load();
             } else
             {
+                throw new NoFileFoundException("No file could be found");
                 return new Game();
             }
         }

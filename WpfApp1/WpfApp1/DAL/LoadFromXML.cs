@@ -28,7 +28,7 @@ namespace WpfApp1.DAL
                 XDocument loadedFile = XDocument.Load(System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml");
                 if (loadedFile == null)
                 {
-                    throw new NoFileFoundException("No file to be found in the file system");
+                    throw new NoSavedDataException("No file to be found in the file system");
                 }
                 
                 var q = from b in loadedFile.Descendants("Root")
@@ -87,9 +87,9 @@ namespace WpfApp1.DAL
                 return game;
             } catch (Exception ex)
             {
-                if (ex is NoFileFoundException)
+                if (ex is NoSavedDataException)
                 {
-                    Console.WriteLine(ex.Message);
+                    return game; 
                 }
             }
             return game;
@@ -101,7 +101,9 @@ namespace WpfApp1.DAL
             {
                 return true;
             }
-            return false; 
+            
+            return false;
+            throw new NoFileFoundException("No file to be found");
         }
     }
 }

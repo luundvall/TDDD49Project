@@ -114,63 +114,72 @@ namespace WpfApp1
         {
             NewGameButton.Content = "Start New Game";
             ËnableGrid(gameLoop.getActiveBoard().getId().ToString());
-            if (gameLoop.gameExists())
+            try
             {
-                MessageBoxResult dr = MessageBox.Show("Do you want to resume the game?", "Resume", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (dr == MessageBoxResult.Yes)
+                if (gameLoop.gameExists())
                 {
-                    this.game = gameLoop.resumeGame();
-
-                    UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
-                    foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
+                    MessageBoxResult dr = MessageBox.Show("Do you want to resume the game?", "Resume", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (dr == MessageBoxResult.Yes)
                     {
-                        Grid parent = button.Parent as Grid;
-                        string parentString = parent.Tag.ToString();
-                        int parentId = Int32.Parse(parentString);
+                        this.game = gameLoop.resumeGame();
 
-                        foreach (SubBoard s in ub.getListOfSub())
+                        UltimateBoard ub = gameLoop.resumeGame().getGameLoop().GetUltimateBoard();
+                        foreach (System.Windows.Controls.Button button in FindVisualChildren<System.Windows.Controls.Button>(this))
                         {
-                            for (int col = 0; col < 3; col++)
+                            Grid parent = button.Parent as Grid;
+                            string parentString = parent.Tag.ToString();
+                            int parentId = Int32.Parse(parentString);
+
+                            foreach (SubBoard s in ub.getListOfSub())
                             {
-                                for (int row = 0; row < 3; row++)
+                                for (int col = 0; col < 3; col++)
                                 {
-                                    BLL.Button b = s.getButtonBoard()[col, row];
-                                    if (b.getMarker().Equals("X"))
+                                    for (int row = 0; row < 3; row++)
                                     {
-
-                                        string tag = button.Tag.ToString();
-                                        int buttonTag = Int32.Parse(tag);
-
-                                        if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                        BLL.Button b = s.getButtonBoard()[col, row];
+                                        if (b.getMarker().Equals("X"))
                                         {
-                                            button.Content = "X";
-                                            button.FontSize = 40;
-                                            button.Foreground = Brushes.Blue;
+
+                                            string tag = button.Tag.ToString();
+                                            int buttonTag = Int32.Parse(tag);
+
+                                            if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                            {
+                                                button.Content = "X";
+                                                button.FontSize = 40;
+                                                button.Foreground = Brushes.Blue;
+                                            }
                                         }
-                                    }
 
-                                    if (b.getMarker().Equals("O"))
-                                    {
-                                        string tag = button.Tag.ToString();
-                                        int buttonTag = Int32.Parse(tag);
-
-                                        if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                        if (b.getMarker().Equals("O"))
                                         {
-                                            button.Content = "O";
-                                            button.FontSize = 40;
-                                            button.Foreground = Brushes.Red;
+                                            string tag = button.Tag.ToString();
+                                            int buttonTag = Int32.Parse(tag);
+
+                                            if (buttonTag.Equals(b.ButtonId) && parentId.Equals(b.BoardId))
+                                            {
+                                                button.Content = "O";
+                                                button.FontSize = 40;
+                                                button.Foreground = Brushes.Red;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
+                            }
                         }
                     }
-                }
-                else if (dr == MessageBoxResult.No)
+                    else if (dr == MessageBoxResult.No)
+                    {
+                        this.game = new Game();
+                    }
+                } else if(!gameLoop.gameExists())
                 {
-                    this.game = new Game();
+                    throw new NoFileFoundException("No file could be found in the file system");
                 }
+            } catch (NoFileFoundException message)
+            {
+                MessageBox.Show(message.Message);
             }
 
         }
