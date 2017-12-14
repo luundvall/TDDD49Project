@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-\\ad.liu.se\home\karlu403\desktop\C# projekt\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\
+C:\Users\Karl Lundvall\Desktop\TDDD49Project\WpfApp1\WpfApp1\obj\Debug\
 WpfApp1
 none
 false
@@ -12,11 +12,7 @@ DEBUG;TRACE
 
 2-2106451093
 
-<<<<<<< HEAD
-271059501717
-=======
-201570335194
->>>>>>> 6a182e72f5bedd796c8bbd1862c4013e825e85de
+26-1023379356
 131569487696
 App.xaml;GUI\MainWindow.xaml;
 
