@@ -19,6 +19,7 @@ namespace WpfApp1.BLL
         private Button clickedButton;
         private XMLsaver xmlsaver;
         private LoadFromXML loadFromXML;
+        private Initable init;
 
         public GameLoop(Player playerX, Player playerO, UltimateBoard ub, XMLsaver xmlsaver, LoadFromXML loadFromXML)
         {
@@ -29,6 +30,11 @@ namespace WpfApp1.BLL
             this.player2 = playerO;
             this.xmlsaver = xmlsaver;
             this.loadFromXML = loadFromXML; 
+        }
+
+        public void SetInitable(Initable init)
+        {
+            this.init = init;
         }
 
         public SubBoard getActiveBoard()
@@ -93,20 +99,20 @@ namespace WpfApp1.BLL
         }
 
         public Game resumeGame()
-        {
-            
-            if (this.loadFromXML.fileExists())
+        {   
+            try
+            {    
+            return this.loadFromXML.load();
+                
+            } catch (NoFileFoundException message)
             {
-                return this.loadFromXML.load();
-            } else
-            {
-                throw new NoFileFoundException("No file could be found");
-                return new Game();
+                
             }
+            return init.Init(); 
         }
 
         public bool gameExists()
-        {
+        {   
               return this.loadFromXML.fileExists();
         }
 

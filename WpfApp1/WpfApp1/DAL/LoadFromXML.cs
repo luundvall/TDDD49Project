@@ -13,15 +13,22 @@ namespace WpfApp1.DAL
    public class LoadFromXML
     {
         private string path;
+        private GameLoop gameLoop;
+        private Initable init; 
 
         public LoadFromXML()
         {
             this.path = System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml";
         }
 
+        public void SetInitable(Initable init)
+        {
+            this.init = init;
+        }
+
         public Game load()
         {
-            Game game = new Game();
+            Game game = init.Init();
             try
             {
                 
@@ -100,10 +107,10 @@ namespace WpfApp1.DAL
             if(File.Exists(this.path))
             {
                 return true;
+            } else
+            {
+                throw new NoFileFoundException("No file to be found");
             }
-            
-            return false;
-            throw new NoFileFoundException("No file to be found");
         }
     }
 }

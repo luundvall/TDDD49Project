@@ -7,7 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using WpfApp1.BLL;
 using System.Drawing;
-
+using WpfApp1.DAL;
+using WpfApp1;
+using WpfApp1.GUI;
 
 namespace WpfApp1
 {
@@ -15,6 +17,7 @@ namespace WpfApp1
     {
         private Game game = null;
         private GameLoop gameLoop;
+        private GUI.Initable init;
 
         public MainWindow()
         {
@@ -29,7 +32,7 @@ namespace WpfApp1
         public void New_Game(object sender, RoutedEventArgs e)
         {
             Winner.Text = null;
-            this.game = new Game();
+            this.game = init.Init();
             ËnableGrid("1");
             clearButton();
         }
@@ -171,11 +174,12 @@ namespace WpfApp1
                     }
                     else if (dr == MessageBoxResult.No)
                     {
-                        this.game = new Game();
+
+
+                        this.game = init.Init();
                     }
                 } else if(!gameLoop.gameExists())
                 {
-                    throw new NoFileFoundException("No file could be found in the file system");
                 }
             } catch (NoFileFoundException message)
             {
@@ -183,7 +187,15 @@ namespace WpfApp1
             }
 
         }
-        
+
+
+        public void SetInitable(GUI.Initable init)
+        {
+            this.init = init;
+        }
+
+       
+
         public void checkWinner(GameLoop gameLoop)
         {
             Xwinner1.Visibility = System.Windows.Visibility.Hidden;
@@ -211,7 +223,7 @@ namespace WpfApp1
                 else
                 {
                     Winner.Text = null;
-                    this.game = new Game();
+                    this.game = init.Init();
                     clearButton();
                 }
 

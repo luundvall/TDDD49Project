@@ -4,37 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.DAL;
+using WpfApp1.GUI;
 
 namespace WpfApp1.BLL
 {
     public class Game
     {
-        private SubBoard[,] subBoards = new SubBoard[3, 3];
         private Player player1;
         private Player player2;
         private XMLsaver xmlsaver;
         private LoadFromXML loadFromXML;
         private GameLoop gameLoop;
+        private UltimateBoard ub;
+        private Initable init;
 
 
-        public Game() { 
-            int boardId = 1;
-            for (int col = 0; col < 3; col++)
-            {
-                for (int row = 0; row < 3; row++)
-                {
-                    subBoards[col, row] = new SubBoard(getButtonBoard(boardId), boardId);
-                    boardId++;
-                }
-            }
+        public Game(UltimateBoard ub, Player player1, Player player2, XMLsaver xmlSaver, LoadFromXML loadFromXML) {
+            this.ub = ub; 
+            this.player1 = player1;
+            this.player2 = player2;
+            this.xmlsaver = xmlSaver;
+            this.loadFromXML = loadFromXML;
+
+            this.gameLoop = new GameLoop(player1, player2, ub, xmlSaver, loadFromXML);
             
-            
-            this.player1 = new Player("X");
-            this.player2 = new Player("O");
-            this.xmlsaver = new XMLsaver();
-            this.loadFromXML = new LoadFromXML();
-            this.gameLoop = new GameLoop(player1, player2, new UltimateBoard(subBoards), xmlsaver, loadFromXML);
-            Console.WriteLine("Created new game");
         }
 
         public GameLoop getGameLoop()
@@ -42,20 +35,10 @@ namespace WpfApp1.BLL
             return this.gameLoop;
         }
 
-        public Button[,] getButtonBoard(int boardId)
+         void SetInitable(Initable init)
         {
-            Button[,] buttonBoard = new Button[3, 3];
-
-            int buttonId = 1;
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    buttonBoard[row, col] = new Button(buttonId, boardId);
-                    buttonId++;
-                }
-            }
-            return buttonBoard;
+            this.init = init;
         }
+
     }
 }

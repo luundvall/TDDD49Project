@@ -69,14 +69,20 @@
     <Compile Include="BLL\ButtonTakenException.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\GameLoop.cs" />
+    <Compile Include="BLL\Initable.cs" />
     <Compile Include="BLL\NoFileFoundException.cs" />
     <Compile Include="BLL\Player.cs" />
     <Compile Include="BLL\SubBoard.cs" />
     <Compile Include="BLL\UltimateBoard.cs" />
+    <Compile Include="DAL\Initable.cs" />
     <Compile Include="DAL\NoSavedDataException.cs" />
     <Compile Include="DAL\WrongFormatException.cs" />
     <Compile Include="DAL\LoadFromXML.cs" />
     <Compile Include="DAL\XMLsaver.cs" />
+    <Compile Include="DefaultInit.cs" />
+    <Compile Include="DefaultInitBLL.cs" />
+    <Compile Include="DefaultInitDAL.cs" />
+    <Compile Include="GUI\Initable.cs" />
     <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
