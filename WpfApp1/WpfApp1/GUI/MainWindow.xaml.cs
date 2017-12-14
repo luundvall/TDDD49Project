@@ -50,7 +50,6 @@ namespace WpfApp1
                 else if (dr == MessageBoxResult.Yes)
                 {
                     gameLoop.saveGame();
-                    e.Cancel = false;
                 }
                 else if (dr == MessageBoxResult.Cancel)
                 {
@@ -70,7 +69,16 @@ namespace WpfApp1
             string tag = clickedButtonTag.ToString();
             int move = Convert.ToInt32(clickedButtonTag);
             int boardId = Int32.Parse(tag);
-
+            try
+            {
+                if (move > 9 || move < 1)
+                {
+                    throw new InvalidClickException("The button does not exsist");
+                }
+            } catch(InvalidClickException message)
+            {
+                Error.Text = message.Message;
+            }
             try
             {
                 if (gameLoop.checkButton(move) || gameLoop.GetUltimateBoard().GetSubBoard(move).getDisable())
@@ -178,12 +186,17 @@ namespace WpfApp1
 
                         this.game = init.Init();
                     }
+
                 } else if(!gameLoop.gameExists())
                 {
+
                 }
-            } catch (NoFileFoundException message)
+            } catch (Exception message)
             {
-                MessageBox.Show(message.Message);
+                if(message is NoFileFoundException)
+                {
+                    MessageBox.Show(message.Message, "Empty filesystem", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
 
         }

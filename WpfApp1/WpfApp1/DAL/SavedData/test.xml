@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <ActivePlayer>O</ActivePlayer>
+  <ButtonID-X BoardId="1">1</ButtonID-X>
+  <ButtonID-X BoardId="1">6</ButtonID-X>
+  <ButtonID-O BoardId="1">7</ButtonID-O>
+  <ButtonID-O BoardId="1">9</ButtonID-O>
+  <ButtonID-X BoardId="3">7</ButtonID-X>
+  <ButtonID-O BoardId="3">5</ButtonID-O>
+  <ButtonID-X BoardId="5">7</ButtonID-X>
+  <ButtonID-O BoardId="6">3</ButtonID-O>
+  <ButtonID-O BoardId="6">7</ButtonID-O>
+  <ButtonID-X BoardId="7">6</ButtonID-X>
+  <ButtonID-O BoardId="7">4</ButtonID-O>
+  <ButtonID-X BoardId="9">3</ButtonID-X>
+</Root>

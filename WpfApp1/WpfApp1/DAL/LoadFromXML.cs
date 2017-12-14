@@ -29,25 +29,19 @@ namespace WpfApp1.DAL
         public Game load()
         {
             Game game = init.Init();
-            try
-            {
-                
+
                 XDocument loadedFile = XDocument.Load(System.IO.Path.GetFullPath(@"..\..\") + "DAL\\SavedData\\test.xml");
-                if (loadedFile == null)
-                {
-                    throw new NoSavedDataException("No file to be found in the file system");
-                }
-                
+
                 var q = from b in loadedFile.Descendants("Root")
                         select new
                         {
                             ActivePlayer = (string)b.Element("ActivePlayer"),
                         };
 
-                foreach(var Ap in q)
+                foreach (var Ap in q)
                 {
-                   String Active = Ap.ToString();
-                    if(game.getGameLoop().getPlayer1().setMarker().Equals(Active))
+                    String Active = Ap.ToString();
+                    if (game.getGameLoop().getPlayer1().setMarker().Equals(Active))
                     {
                         game.getGameLoop().setActivePlayer(game.getGameLoop().getPlayer1());
                     } else
@@ -56,7 +50,7 @@ namespace WpfApp1.DAL
                     }
                 }
 
-                    var allO = from b in loadedFile.Descendants("ButtonID-O")
+                var allO = from b in loadedFile.Descendants("ButtonID-O")
                            select new
                            {
                                buttonId = (string)b.Value,
@@ -80,7 +74,6 @@ namespace WpfApp1.DAL
                     Console.WriteLine("setted marker X on " + board + ", on button " + button);
                 }
 
-                
                 foreach (var r in allO)
                 {
                     Player playerO = new Player("O");
@@ -89,18 +82,8 @@ namespace WpfApp1.DAL
                     game.getGameLoop().GetUltimateBoard().GetSubBoard(board).getButton(button).setMarker("O");
                     Console.WriteLine("setted marker X on " + board + ", on button " + button);
                 }
-
-             
                 return game;
-            } catch (Exception ex)
-            {
-                if (ex is NoSavedDataException)
-                {
-                    return game; 
-                }
-            }
-            return game;
-        }
+        }    
 
         public bool fileExists()
         {

@@ -69,6 +69,7 @@
     <Compile Include="BLL\ButtonTakenException.cs" />
     <Compile Include="BLL\Game.cs" />
     <Compile Include="BLL\GameLoop.cs" />
+<<<<<<< HEAD
     <Compile Include="BLL\Initable.cs" />
     <Compile Include="BLL\NoFileFoundException.cs" />
     <Compile Include="BLL\Player.cs" />
@@ -83,6 +84,15 @@
     <Compile Include="DefaultInitBLL.cs" />
     <Compile Include="DefaultInitDAL.cs" />
     <Compile Include="GUI\Initable.cs" />
+=======
+    <Compile Include="DAL\NoFileFoundException.cs" />
+    <Compile Include="BLL\Player.cs" />
+    <Compile Include="BLL\SubBoard.cs" />
+    <Compile Include="BLL\UltimateBoard.cs" />
+    <Compile Include="DAL\LoadFromXML.cs" />
+    <Compile Include="DAL\XMLsaver.cs" />
+    <Compile Include="GUI\InvalidClickException.cs" />
+>>>>>>> 6a182e72f5bedd796c8bbd1862c4013e825e85de
     <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -116,10 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\SavedData\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GUI\img\O.gif" />
-    <Resource Include="GUI\img\X.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
